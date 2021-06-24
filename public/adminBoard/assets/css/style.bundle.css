@@ -61300,7 +61300,7 @@ body {
       position: fixed;
       z-index: 96; }
     .topbar-mobile-on .topbar {
-      z-index: 2;
+      z-index: 999;
       -webkit-transition: all 0.3s ease;
       transition: all 0.3s ease;
       border-top: 1px solid #EBEDF3;
