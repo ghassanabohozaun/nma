@@ -314,8 +314,14 @@
                 success: function (data) {
                     console.log(data);
                     if (data.status == true) {
-                        Swal.fire(data.msg, "", "success");
-                        $('.swal2-confirm').click(function(){
+                        Swal.fire({
+                                title: data.msg,
+                                text: "",
+                                icon: "success",
+                                allowOutsideClick: false,
+                                customClass: { confirmButton: 'update_user_button' }
+                            });
+                        $('.update_user_button').click(function () {
                             window.location.href = "{{route('users')}}";
                         });
                     }

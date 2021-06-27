@@ -64,16 +64,14 @@
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
+                                                    <th>@lang('users.photo')</th>
                                                     <th>@lang('users.name')</th>
                                                     <th>@lang('users.email')</th>
                                                     <th>@lang('users.mobile')</th>
                                                     <th>@lang('users.gender')</th>
                                                     <th>@lang('users.last_login_at')</th>
-                                                    <th>@lang('users.last_login_ip')</th>
-                                                    <th>@lang('users.photo')</th>
                                                     <th>@lang('users.status')</th>
                                                     <th>@lang('general.actions')</th>
-
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -117,13 +115,12 @@
     <script>
         window.data_url = "{{route('get.users')}}";
         window.columns = [{data: "id"},
+            {data: "photo"},
             {data: "name"},
             {data: "email"},
             {data: "mobile"},
             {data: "gender"},
             {data: "last_login_at"},
-            {data: "last_login_ip"},
-            {data: "photo"},
             {data: "status"},
             {data: "actions"}
         ];
@@ -136,19 +133,66 @@
         /// Show user Delete Notify
         $(document).on('click', '.delete_user_btn', function (e) {
             e.preventDefault();
-            $.notifyClose();
             var id = $(this).data('id');
-            $('#user_delete_id').val(id);
 
-            $.notifyClose();
-            notify_message = " <i class='fa fa-trash' style='color:white'></i> &nbsp; {{trans('general.ask_delete_record')}}<br /><br />" +
+            Swal.fire({
+                title: "{{trans('general.ask_delete_record')}}",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "{{trans('general.yes')}}",
+                cancelButtonText: "{{trans('general.no')}}",
+                reverseButtons: false,
+                allowOutsideClick: false,
+            }).then(function (result) {
+                if (result.value) {
+                    //////////////////////////////////////
+                    // Delete User
+                    $.ajax({
+                        url: '{!! route('user.destroy') !!}',
+                        data: {id, id},
+                        type: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            if (data.status == true) {
+                                Swal.fire({
+                                    title: "{!! trans('general.deleted') !!}",
+                                    text: "{!! trans('general.delete_success_message') !!}",
+                                    icon: "success",
+                                    allowOutsideClick: false,
+                                    customClass: {confirmButton: 'delete_user_button'}
+                                });
+                                $('.delete_user_button').click(function () {
+                                    updateDataTable();
+                                });
+                            }
+                        },//end success
+                    });
+
+                } else if (result.dismiss === "cancel") {
+                    Swal.fire({
+                        title: "{!! trans('general.cancelled') !!}",
+                        text: "{!! trans('general.error_message') !!}",
+                        icon: "error",
+                        allowOutsideClick: false,
+                        customClass: {confirmButton: 'cancel_delete_user_button'}
+                    })
+                }
+            });
+
+            /* $.notifyClose();
+             var id = $(this).data('id');
+             $('#user_delete_id').val(id);
+
+             $.notifyClose();
+             notify_message = " <i class='fa fa-trash' style='color:white'></i> &nbsp; <br /><br />" +
                 "<button type='button' id='btn_user_delete'  class=' btn btn-outline-light btn-sm m-btn m-btn--air m-btn--wide '" +
                 ">{{trans('general.yes')}}</button> &nbsp;" +
                 "<button type='button' id='btn_user_close' class=' btn btn-outline-light btn-sm m-btn m-btn--air m-btn--wide '" +
                 ">{{trans('general.no')}}</button>"
 
             notifyDelete(notify_message, 'danger')
-
+*/
         })
 
         ///////////////////////////////////////////////////
@@ -214,11 +258,19 @@
                 dataType: 'JSON',
                 success: function (data) {
                     console.log(data);
-                    if (data.status == true) {
-                        notifySuccessOrError(data.msg, 'success');
-                        updateDataTable();
-                    }
-                }
+                        if (data.status == true) {
+                            Swal.fire({
+                                title: data.msg,
+                                text: "",
+                                icon: "success",
+                                allowOutsideClick: false,
+                                customClass: {confirmButton: 'update_user_status_button'}
+                            });
+                            $('.update_user_status_button').click(function () {
+                                updateDataTable();
+                            });
+                        }
+                },//end success
             })
         })
 

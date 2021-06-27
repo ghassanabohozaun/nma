@@ -282,9 +282,15 @@
                 },
                 success: function (data) {
                     console.log(data);
-                    if(data.status == true){
-                        Swal.fire(data.msg, "", "success");
-                        $('.swal2-confirm').click(function(){
+                    if (data.status == true) {
+                        Swal.fire({
+                            title: data.msg,
+                            text: "",
+                            icon: "success",
+                            allowOutsideClick: false,
+                            customClass: { confirmButton: 'add_user_button' }
+                        });
+                        $('.add_user_button').click(function () {
                             window.location.href = "{{route('users')}}";
                         });
                     }

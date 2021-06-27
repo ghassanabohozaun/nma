@@ -42,6 +42,9 @@ return [
     'female' => 'Female',
     'others'=>'Others',
     'none' => 'None',
+    'deleted'=>'Deleted!',
+    'cancelled'=>'Cancelled!',
+
     'change_image' => 'Change image',
     'image_format_allow' => 'Allowed file types jpg,jpeg,png',
     'add_success_message' => ' Added Successfully',
@@ -50,6 +53,8 @@ return [
     'upload_success_message' => ' Upload Successfully',
     'internal_server_error_message' => 'Sorry, Internal server Error ',
     'try_catch_error_message' => 'Sorry, There is an error, please try again later',
+    'error_message' => 'Sorry, There is an error',
+
     'ask_delete_record' => 'Do You Want To Delete This Record ? ',
     'change_status_success_message' => 'change Status Successfully',
     'export' => 'Export',

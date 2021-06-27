@@ -46,18 +46,20 @@
 
         <link href="{{asset('adminBoard/assets/css/themes/layout/header/base/light.rtl.css')}}" rel="stylesheet"
               type="text/css"/>
-        <link href="{{asset('adminBoard/assets/css/themes/layout/header/menu/light.rtl.css')}}" rel="stylesheet"
+        <link href="{{asset('adminBoard/assets/css/themes/layout/header/menu/dark.rtl.css')}}" rel="stylesheet"
               type="text/css"/>
-        <link href="{{asset('adminBoard/assets/css/themes/layout/brand/light.rtl.css')}}" rel="stylesheet"
+        <link href="{{asset('adminBoard/assets/css/themes/layout/brand/dark.rtl.css')}}" rel="stylesheet"
               type="text/css"/>
-        <link href="{{asset('adminBoard/assets/css/themes/layout/aside/light.rtl.css')}}" rel="stylesheet"
+        <link href="{{asset('adminBoard/assets/css/themes/layout/aside/dark.rtl.css')}}" rel="stylesheet"
               type="text/css"/>
         <!--end::Layout Themes-->
 
         <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet"/>
         <style>
             body, html {
-                font-family: 'Cairo', sans-serif;
+                font-family: "Poppins", "ArbFONTSBEINNormalAR", sans-serif;
+                font-weight: normal;
+                font-style: normal;
             }
         </style>
 
@@ -75,19 +77,20 @@
 
         <link href="{{asset('adminBoard/assets/css/themes/layout/header/base/light.css')}}" rel="stylesheet"
               type="text/css"/>
-        <link href="{{asset('adminBoard/assets/css/themes/layout/header/menu/light.css')}}" rel="stylesheet"
+        <link href="{{asset('adminBoard/assets/css/themes/layout/header/menu/dark.css')}}" rel="stylesheet"
               type="text/css"/>
-        <link href="{{asset('adminBoard/assets/css/themes/layout/brand/light.css')}}" rel="stylesheet" type="text/css"/>
-        <link href="{{asset('adminBoard/assets/css/themes/layout/aside/light.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('adminBoard/assets/css/themes/layout/brand/dark.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('adminBoard/assets/css/themes/layout/aside/dark.css')}}" rel="stylesheet" type="text/css"/>
         <!--end::Layout Themes-->
 
         <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet"/>
         <style>
             body, html {
-                font-family: 'Cairo', sans-serif;
+                font-family: "Poppins", "ArbFONTSBEINNormalAR", sans-serif;
+                font-weight: normal;
+                font-style: normal;
             }
         </style>
-
     @endif
 
     <link href="{{asset('adminBoard/assets/css/mystyle.css')}}" rel="stylesheet" type="text/css"/>
@@ -117,8 +120,8 @@
             <div class="brand flex-column-auto " id="kt_brand">
                 <!--begin::Logo-->
                 @if(!empty(setting()->site_logo))
-                    <a href="#" class="brand-logo" style="margin-top: 10px">
-                        <img src="{{asset(Storage::url(setting()->site_logo))}}" width="90" height="85">
+                    <a href="#" class="brand-logo">
+                        <img src="{{asset(Storage::url(setting()->site_logo))}}" style="border-radius: 10%;width: 80px; height: 60px" >
                     </a>
                 @else
                     LOGO

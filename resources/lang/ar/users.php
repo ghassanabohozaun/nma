@@ -11,7 +11,7 @@ return [
     'gender'=>'الجنس',
     'status'=>'حالة المستخدم',
     'last_login_at'=>'اخر عملية تسجيل دخول',
-    'last_login_ip'=>'IP',
+    'last_login_ip'=>'عنوان الاي بي',
 
     'enter_name'=>' ادخل اسم المستخدم',
     'enter_email'=>' ادخل ايميل المستخدم',
@@ -21,7 +21,7 @@ return [
     'enter_gender'=>' ادخل الجنس',
     'enter_status'=>'ادخل حالة المستخدم',
     'enter_last_login_at'=>' ادخل اخر عملية تسجيل دخول',
-    'enter_last_login_ip'=>'IP ادخل ',
+    'enter_last_login_ip'=>'ادخل عنوان الاي بي',
 
     'required'=>'هذا الحقل مطلوب',
     'image' => 'يجب ان تكون صورة',

@@ -61,7 +61,6 @@
                                                     <span class="text-warning">{{admin()->user()->name}}</span>&nbsp;,
                                                     &nbsp;
                                                     {!! trans('dashboard.welcome_message_details') !!}
-
                                                 </h5>
 
 
@@ -69,7 +68,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row" style="margin-top: 20px">
 
                                         <div class="col-lg-2">
 
@@ -86,13 +85,16 @@
                                             @endif
 
                                         </div>
-                                        <div class="col-lg-6 text-warning" style="font-weight: bolder;font-size: 15px">
-                                            <p style="margin-top: 30px;">{{trans('dashboard.name')}}
+                                        <div class="col-lg-6 " style=" margin-top: 10px; font-weight: bolder;font-size: 15px">
+                                            <p style="">{{trans('dashboard.name')}}
                                                 : {{admin()->user()->name}}</p>
                                             <p>{{trans('dashboard.email')}} : {{admin()->user()->email}}</p>
+                                            <p>{{trans('users.last_login_at')}} : {{admin()->user()->last_login_at}}</p>
+                                            <p>{{trans('users.last_login_ip')}} : {{admin()->user()->last_login_ip}}</p>
+
                                         </div>
                                     </div>
-                                    <br/> <br/>
+
                                 </div>
                             </div>
                         </div>

@@ -6,15 +6,9 @@
          data-menu-vertical="1"
          data-menu-scroll="1" data-menu-dropdown-timeout="500">
         <!--begin::Menu Nav-->
-        <style>
-            .aside-menu .menu-nav > .menu-item.menu-item-active >
-            .menu-heading, .aside-menu .menu-nav >
-            .menu-item.menu-item-active > .menu-link {
-                background-color: #e2f0fa;
-            }
-        </style>
+
         <ul class="menu-nav ">
-            <li class="menu-item  menu-item-active" aria-haspopup="true" style="height: 55px;">
+            <li class="menu-item  menu-item-active" aria-haspopup="true" style="height: 40px;">
                 <a href="{{route('admin.dashboard')}}" class="menu-link ">
                     <span class="svg-icon menu-icon">
                         <svg xmlns="http://www.w3.org/2000/svg"

@@ -46,6 +46,8 @@ return [
     'female'=>'انثي',
     'others'=>'آخري',
     'none'=>'بدون',
+    'deleted'=>'حذف!',
+    'cancelled'=>'الغاء!',
 
 
     'change_image'=>'تغير الصورة',
@@ -56,6 +58,8 @@ return [
     'upload_success_message'=>'تمت عملية الرفع بنجاح',
     'internal_server_error_message'=>'عذراً , خطأ داخلي في الخادم ',
     'try_catch_error_message'=>'عذراً , هتالك خطأ ما يرجي المحاولة فيما بعد  ',
+    'error_message'=>'عذراً , هتالك خطأ ما',
+
     'ask_delete_record'=>'هل تريد حذف هذا السجل ؟ ',
     'change_status_success_message'=>'تمت عملية تغير الحالة بنجاح',
     'export'=>'تصدير',

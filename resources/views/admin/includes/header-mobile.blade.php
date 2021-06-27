@@ -3,7 +3,7 @@
 
     @if(!empty(setting()->site_logo))
         <a href="#" >
-            <img src="{{asset(Storage::url(setting()->site_logo))}}" width="55" height="50">
+            <img src="{{asset(Storage::url(setting()->site_logo))}}" style="border-radius: 10%;width: 55px; height: 50px">
         </a>
     @else
         LOGO
