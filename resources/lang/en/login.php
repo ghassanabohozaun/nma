@@ -41,4 +41,9 @@ return [
     'password_required' => 'Password Required',
     'password_min' => 'Password Must be Grater than 6 characters',
     'login_failed' => 'Login Failed',
+
+    'account_unavailable'=>'Account Unavailable',
+    'account_disabled'=>'Account Disabled',
+
+
 ];

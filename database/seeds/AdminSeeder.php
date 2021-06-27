@@ -16,6 +16,8 @@ class AdminSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => '$2y$10$7oMefZl1L95XO5zSHAufv.JiaRzPod4LHahnkKwW3CjtfBrXfmiN2',
+            'status'=>1,
+
         ]);
     }
 }

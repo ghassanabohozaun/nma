@@ -1,4 +1,4 @@
-<a href="{{route('admin.faqs.edit',$instance->id)}}" class="btn btn-hover-primary btn-icon btn-pill "
+<a href="{{route('user.edit',$instance->id)}}" class="btn btn-hover-primary btn-icon btn-pill "
    title="{{trans('general.edit')}}">
     <i class="fa fa-edit fa-1x"></i>
 </a>

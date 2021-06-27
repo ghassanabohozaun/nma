@@ -45,8 +45,12 @@ Route::group([
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', 'UserController@index')->name('users');
         Route::get('/get-users', 'UserController@getUsers')->name('get.users');
-       Route::post('/destroy','UserController@destroy')->name('user.destroy');
-        Route::post('/change-status','UserController@changeStatus')->name('user.change.status');
+        Route::post('/destroy', 'UserController@destroy')->name('user.destroy');
+        Route::post('/change-status', 'UserController@changeStatus')->name('user.change.status');
+        Route::get('/create', 'UserController@create')->name('user.create');
+        Route::post('store', 'UserController@store')->name('user.store');
+        Route::get('/edit/{id?}', 'UserController@edit')->name('user.edit');
+        Route::post('update', 'UserController@update')->name('user.update');
 
     });
 

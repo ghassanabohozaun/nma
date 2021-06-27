@@ -31,4 +31,14 @@ class Admin extends Authenticatable
         return $this->hasMany('App\Models\Post', 'admin_id', 'id');
     }
 
+    //////////////////////////////////// accessors ///////////////////////
+    /// Gender accessors
+    public function getGenderAttribute($value)
+    {
+        if ($value == 'male') {
+            return trans('general.male');
+        } elseif ($value == 'female') {
+            return trans('general.female');
+        }
+    }
 }

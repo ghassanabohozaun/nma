@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Models\Admin;
+use Carbon\Carbon;
 
 class LoginController extends Controller
 {
@@ -17,15 +19,31 @@ class LoginController extends Controller
     public function doLogin(LoginRequest $request)
     {
 
-        $rememberMe = $request->has('rememberMe')  ? true : false;
+        $admin = Admin::where('email', $request->email)->first();
 
-        if (auth()->guard('admin')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $rememberMe))
-        {
-
-            return redirect()->route('admin.dashboard');
-
+        if (!$admin) {
+            return redirect()->route('get.admin.login')
+                ->with(['error' => trans('login.account_unavailable')]);
         } else {
-            return redirect()->route('get.admin.login')->with(['error'=>trans('login.login_failed')]);
+            if($admin->status == '1'){
+
+                $rememberMe = $request->has('rememberMe') ? true : false;
+
+                if (auth()->guard('admin')->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $rememberMe)) {
+                    $admin->update([
+                        'last_login_at' => Carbon::now()->toDateTimeString(),
+                        'last_login_ip' => $request->getClientIp()
+                    ]);
+                    return redirect()->route('admin.dashboard');
+
+                } else {
+                    return redirect()->route('get.admin.login')->with(['error' => trans('login.login_failed')]);
+                }
+            }else{
+                return redirect()->route('get.admin.login')
+                    ->with(['error' => trans('login.account_disabled')]);
+            }
+
         }
 
     }

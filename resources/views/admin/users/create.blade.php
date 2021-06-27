@@ -2,8 +2,8 @@
 @section('title') @endsection
 @section('content')
 
-    <form class="form" action="{{route('admin.faqs.store')}}" method="POST"
-          id="form_faq_store"
+    <form class="form" action="{{route('user.store')}}" method="POST"
+          id="form_user_store"
           enctype="multipart/form-data">
     @csrf
     <!--begin::Subheader-->
@@ -19,13 +19,13 @@
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                         <li class="breadcrumb-item">
                             <a href="#" class="text-muted">
-                                {{trans('menu.faqs')}}
+                                {{trans('menu.users')}}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item">
                             <a href="" class="text-muted">
-                                {{trans('menu.add_new_faq')}}
+                                {{trans('menu.add_new_user')}}
                             </a>
                         </li>
 
@@ -75,92 +75,141 @@
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">
-                                                            {{trans('faqs.language')}}
+                                                            {{trans('users.photo')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <div
+                                                                class="image-input image-input-outline"
+                                                                id="kt_user_photo">
+                                                            <!--  style="background-image: url({{--asset(Storage::url(setting()->site_icon))--}})"-->
+                                                                <div class="image-input-wrapper"></div>
+                                                                <label
+                                                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                                                    data-action="change" data-toggle="tooltip" title=""
+                                                                    data-original-title="{{trans('general.change_image')}}">
+                                                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                                                    <input type="file" name="photo" id="photo"
+                                                                           class="table-responsive-sm">
+                                                                    <input type="hidden" name="photo_remove"/>
+                                                                </label>
+
+                                                                <span
+                                                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                                                    data-action="cancel" data-toggle="tooltip"
+                                                                    title="Cancel avatar">
+                                                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                                 </span>
+                                                            </div>
+                                                            <span
+                                                                class="form-text text-muted">{{trans('general.image_format_allow')}}
+                                                            </span>
+                                                            <span class="form-text text-danger"
+                                                                  id="photo_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.name')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input
+                                                                class="form-control form-control-solid form-control-lg"
+                                                                name="name" id="name" type="text"
+                                                                placeholder=" {{trans('users.enter_name')}}"
+                                                                autocomplete="off"/>
+                                                            <span class="form-text text-danger"
+                                                                  id="name_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.email')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input
+                                                                class="form-control form-control-solid form-control-lg"
+                                                                name="email" id="email" type="text"
+                                                                placeholder=" {{trans('users.enter_email')}}"
+                                                                autocomplete="off"/>
+                                                            <span class="form-text text-danger"
+                                                                  id="email_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.password')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input
+                                                                class="form-control form-control-solid form-control-lg"
+                                                                name="password" id="password" type="text"
+                                                                placeholder=" {{trans('users.enter_password')}}"
+                                                                autocomplete="off"/>
+                                                            <span class="form-text text-danger"
+                                                                  id="password_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.mobile')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input
+                                                                class="form-control form-control-solid form-control-lg"
+                                                                name="mobile" id="mobile" type="text"
+                                                                placeholder=" {{trans('users.enter_mobile')}}"
+                                                                autocomplete="off"/>
+                                                            <span class="form-text text-danger"
+                                                                  id="mobile_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.gender')}}
                                                         </label>
                                                         <div class="col-lg-9 col-xl-9">
 
                                                             <select
                                                                 class="form-control form-control-solid form-control-lg"
-                                                                name="language" id="language" type="text">
+                                                                name="gender" id="gender" type="text">
 
-                                                                <option value="ar">
-                                                                    {{trans('general.ar')}}
+                                                                <option value="">
+                                                                    {{trans('general.select_from_list')}}
                                                                 </option>
 
-                                                                <option value="en">
-                                                                    {{trans('general.en')}}
+                                                                <option value="male">
+                                                                    {{trans('opinions.male')}}
                                                                 </option>
-                                                                <option value="ar_en">
-                                                                    {{trans('general.ar_en')}}
+
+                                                                <option value="female">
+                                                                    {{trans('opinions.female')}}
                                                                 </option>
 
                                                             </select>
                                                             <span class="form-text text-danger"
-                                                                  id="language_error"></span>
+                                                                  id="gender_error"></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->
-
-                                                    <!--begin::Group-->
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">
-                                                            {{trans('faqs.question_ar')}}
-                                                        </label>
-                                                        <div class="col-lg-9 col-xl-9">
-                                                            <input
-                                                                class="form-control form-control-solid form-control-lg"
-                                                                name="question_ar" id="question_ar" type="text"
-                                                                placeholder=" {{trans('faqs.enter_question_ar')}}"
-                                                                autocomplete="off"/>
-                                                            <span class="form-text text-danger"
-                                                                  id="question_ar_error"></span>
-                                                        </div>
-                                                    </div>
-                                                    <!--end::Group-->
-
-                                                    <!--begin::Group-->
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">
-                                                            {{trans('faqs.question_en')}}
-                                                        </label>
-                                                        <div class="col-lg-9 col-xl-9">
-                                                            <input
-                                                                class="form-control form-control-solid form-control-lg"
-                                                                name="question_en" id="question_en" type="text"
-                                                                placeholder=" {{trans('faqs.enter_question_en')}}"
-                                                                autocomplete="off"/>
-                                                            <span class="form-text text-danger"
-                                                                  id="question_en_error"></span>
-
-                                                        </div>
-                                                    </div>
-                                                    <!--end::Group-->
-
-
-                                                    <!--begin::Group-->
-                                                    <div class="form-group">
-                                                        <label> {{trans('faqs.answer_ar')}}</label>
-                                                        <textarea class="form-control answer_ar"
-                                                                  placeholder="{{trans('faqs.enter_answer_ar')}}"
-                                                                  name="answer_ar"
-                                                                  id="answer_ar"></textarea>
-                                                        <span class="form-text text-danger"
-                                                              id="answer_ar_error"></span>
-                                                    </div>
-                                                    <!--end::Group-->
-
-                                                    <!--begin::Group-->
-                                                    <div class="form-group">
-                                                        <label> {{trans('faqs.answer_en')}}</label>
-                                                        <textarea class="form-control answer_en"
-                                                                  placeholder="{{trans('faqs.enter_answer_en')}}"
-                                                                  name="answer_en"
-                                                                  id="answer_en"></textarea>
-                                                        <span class="form-text text-danger"
-                                                              id="answer_en_error"></span>
-                                                    </div>
-                                                    <!--end::Group-->
-
                                                 </div>
                                                 <!--begin::body-->
 
@@ -186,50 +235,38 @@
 @push('js')
     <script type="text/javascript">
         //////////////////////////////////////////////////////
-        /// summernote
-        $('.answer_ar').summernote({
-            height: 270,   //set editable area's height
+        ///
+        var user_photo = new KTImageInput('kt_user_photo');
 
-            codemirror: { // codemirror options
-                theme: 'monokai'
-            },
-
-        });
-        $('.answer_en').summernote({
-            height: 270,   //set editable area's height
-            codemirror: { // codemirror options
-                theme: 'monokai'
-            }
-        });
-
-
-        //////////////////////////////////////////////////////////////////////////
-        // Store
-        $('#form_faq_store').on('submit', function (e) {
+        /////////////////////////////////////////////////////////
+        // Store User
+        $('#form_user_store').on('submit', function (e) {
             e.preventDefault();
-            $.notifyClose();
-            //////////////////////////////////////////////////////////////
-            $('#question_ar_error').text('');
-            $('#question_en_error').text('');
-            $('#answer_ar_error').text('');
-            $('#answer_en_error').text('');
+            ////////////////////////////////////////////////////
+            $('#name_error').text('');
+            $('#email_error').text('');
+            $('#password_error').text('');
+            $('#photo_error').text('');
+            $('#mobile_error').text('');
+            $('#gender_error').text('');
 
-            $('#question_ar').css('border-color', '');
-            $('#question_en').css('border-color', '');
-            $('#answer_ar').css('border-color', '');
-            $('#answer_en').css('border-color', '');
-            //////////////////////////////////////////////////////////////
-
+            $('#name').css('border-color', '');
+            $('#email').css('border-color', '');
+            $('#password').css('border-color', '');
+            $('#photo').css('border-color', '');
+            $('#mobile').css('border-color', '');
+            $('#gender').css('border-color', '');
+            ////////////////////////////////////////////////////
 
             var data = new FormData(this);
-            var url = $(this).attr('action');
             var type = $(this).attr('method');
+            var url = $(this).attr('action');
 
             $.ajax({
                 url: url,
-                data: data,
                 type: type,
-                dataType: 'JSON',
+                data: data,
+                dataType: false,
                 contentType: false,
                 cache: false,
                 processData: false,
@@ -243,19 +280,17 @@
                         KTApp.unblockPage();
                     }, 1500);
                 },
-
                 success: function (data) {
                     console.log(data);
-                    if (data.status == true) {
-                        notifySuccessOrError(data.msg, 'success');
-                        setTimeout(function () {
-                            window.location.href = "{{route('admin.faqs')}}";
-                        }, 2500)
+                    if(data.status == true){
+                        Swal.fire(data.msg, "", "success");
+                        $('.swal2-confirm').click(function(){
+                            window.location.href = "{{route('users')}}";
+                        });
                     }
                 },
 
                 error: function (reject) {
-                    $.notifyClose();
                     var response = $.parseJSON(reject.responseText);
                     $.each(response.errors, function (key, value) {
                         $('#' + key + '_error').text(value[0]);
@@ -263,23 +298,14 @@
                         $('body,html').animate({scrollTop: 20}, 300);
                     });
                 },
-
                 complete: function () {
                     KTApp.unblockPage();
-                }
+                },
             })
+        })
 
-        });
+
 
     </script>
 @endpush
 
-@push('css')
-    <style>
-        .whom_ar > .note-editable {
-            background-color: #F64E60;
-            color: white;
-        }
-    </style>
-
-@endpush

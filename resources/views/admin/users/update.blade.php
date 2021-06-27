@@ -1,9 +1,18 @@
 @extends('layouts.admin')
 @section('title') @endsection
+@push('css')
+    <style>
+        .form-control:disabled, .form-control[readonly] {
+            background-color: #bec5c7;
+            opacity: 1;
+            color: #0b2e13;
+        }
+    </style>
+@endpush
 @section('content')
 
-    <form class="form" action="{{route('admin.faqs.update')}}" method="POST"
-          id="form_faq_update"
+    <form class="form" action="{{route('user.update')}}" method="POST"
+          id="form_user_update"
           enctype="multipart/form-data">
     @csrf
     <!--begin::Subheader-->
@@ -18,14 +27,14 @@
 
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                         <li class="breadcrumb-item">
-                            <a href="#" class="text-muted">
-                                {{trans('menu.faqs')}}
+                            <a href="{!! route('users') !!}" class="text-muted">
+                                {{trans('menu.users')}}
                             </a>
                         </li>
 
                         <li class="breadcrumb-item">
                             <a href="" class="text-muted">
-                                {{trans('menu.add_new_faq')}}
+                                {{trans('users.update_users')}}
                             </a>
                         </li>
 
@@ -73,14 +82,16 @@
                                                 <div class="my-5">
 
                                                     <!--begin::Group-->
-                                                    <div class="form-group row d-none">
+                                                    <div class="d-none form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">
                                                             ID
                                                         </label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <input
-                                                                class="form-control form-control-solid form-control-lg"
-                                                                name="id" id="id" value="{{$faq->id}}" type="hidden"/>
+                                                            <input value="{{$user->id}}"
+                                                                   class="form-control form-control-solid form-control-lg"
+                                                                   name="id" id="id" type="hidden"
+                                                                   autocomplete="off"/>
+
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->
@@ -89,100 +100,147 @@
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">
-                                                            {{trans('faqs.language')}}
+                                                            {{trans('users.photo')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <div
+                                                                class="image-input image-input-outline"
+                                                                id="kt_user_photo">
+
+                                                                <div class="image-input-wrapper"
+                                                                     style="background-image: url({{asset(Storage::url($user->photo))}})"></div>
+                                                                <label
+                                                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                                                    data-action="change" data-toggle="tooltip" title=""
+                                                                    data-original-title="{{trans('general.change_image')}}">
+                                                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                                                    <input type="file" name="photo" id="photo"
+                                                                           class="table-responsive-sm">
+                                                                    <input type="hidden" name="photo_remove"/>
+                                                                </label>
+
+                                                                <span
+                                                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                                                    data-action="cancel" data-toggle="tooltip"
+                                                                    title="Cancel avatar">
+                                                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                                 </span>
+                                                            </div>
+                                                            <span
+                                                                class="form-text text-muted">{{trans('general.image_format_allow')}}
+                                                            </span>
+                                                            <span class="form-text text-danger"
+                                                                  id="photo_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.name')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input
+                                                                class="form-control form-control-solid form-control-lg"
+                                                                name="name" id="name" type="text"
+                                                                value="{{$user->name}}"
+                                                                placeholder=" {{trans('users.enter_name')}}"
+                                                                autocomplete="off"/>
+                                                            <span class="form-text text-danger"
+                                                                  id="name_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.email')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input
+                                                                class="form-control form-control-solid form-control-lg "
+                                                                name="email" id="email" type="text" disabled="disabled"
+                                                                value="{{$user->email}}"
+                                                                placeholder=" {{trans('users.enter_email')}}"
+                                                                autocomplete="off"/>
+                                                            <span class="form-text text-danger"
+                                                                  id="email_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.password')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input
+                                                                class="form-control form-control-solid form-control-lg"
+                                                                name="password" id="password" type="password"
+                                                                placeholder=" {{trans('users.enter_password')}}"
+                                                                autocomplete="off"/>
+                                                            <span class="form-text text-danger"
+                                                                  id="password_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.mobile')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input
+                                                                class="form-control form-control-solid form-control-lg"
+                                                                name="mobile" id="mobile" type="text"
+                                                                value="{{$user->mobile}}"
+                                                                placeholder=" {{trans('users.enter_mobile')}}"
+                                                                autocomplete="off"/>
+                                                            <span class="form-text text-danger"
+                                                                  id="mobile_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.gender')}}
                                                         </label>
                                                         <div class="col-lg-9 col-xl-9">
 
                                                             <select
                                                                 class="form-control form-control-solid form-control-lg"
-                                                                name="language" id="language" type="text">
+                                                                name="gender" id="gender" type="text">
 
-                                                                <option
-                                                                    {{$faq->language == trans('general.ar') ? 'selected':''}}
-                                                                    value="ar">
-                                                                    {{trans('general.ar')}}
+                                                                <option value="">
+                                                                    {{trans('general.select_from_list')}}
                                                                 </option>
 
                                                                 <option
-                                                                    {{$faq->language == trans('general.en') ? 'selected':''}}
-                                                                    value="en">
-                                                                    {{trans('general.en')}}
+                                                                    value="male" {!! $user->gender == trans('general.male')?'selected':'' !!}>
+                                                                    {{trans('general.male')}}
                                                                 </option>
+
                                                                 <option
-                                                                    {{$faq->language == trans('general.ar_en') ? 'selected':''}}
-                                                                    value="ar_en">
-                                                                    {{trans('general.ar_en')}}
+                                                                    value="female" {!! $user->gender == trans('general.female')?'selected':'' !!}>
+                                                                    {{trans('general.female')}}
                                                                 </option>
 
                                                             </select>
                                                             <span class="form-text text-danger"
-                                                                  id="language_error"></span>
+                                                                  id="gender_error"></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->
-
-                                                    <!--begin::Group-->
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">
-                                                            {{trans('faqs.question_ar')}}
-                                                        </label>
-                                                        <div class="col-lg-9 col-xl-9">
-                                                            <input
-                                                                class="form-control form-control-solid form-control-lg"
-                                                                name="question_ar" id="question_ar" type="text"
-                                                                placeholder=" {{trans('faqs.enter_question_ar')}}"
-                                                                value="{{$faq->question_ar}}"
-                                                                autocomplete="off"/>
-                                                            <span class="form-text text-danger"
-                                                                  id="question_ar_error"></span>
-                                                        </div>
-                                                    </div>
-                                                    <!--end::Group-->
-
-                                                    <!--begin::Group-->
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">
-                                                            {{trans('faqs.question_en')}}
-                                                        </label>
-                                                        <div class="col-lg-9 col-xl-9">
-                                                            <input
-                                                                class="form-control form-control-solid form-control-lg"
-                                                                name="question_en" id="question_en" type="text"
-                                                                placeholder=" {{trans('faqs.enter_question_en')}}"
-                                                                value="{{$faq->question_en}}"
-                                                                autocomplete="off"/>
-                                                            <span class="form-text text-danger"
-                                                                  id="question_en_error"></span>
-
-                                                        </div>
-                                                    </div>
-                                                    <!--end::Group-->
-
-
-                                                    <!--begin::Group-->
-                                                    <div class="form-group">
-                                                        <label> {{trans('faqs.answer_ar')}}</label>
-                                                        <textarea class="form-control answer_ar"
-                                                                  placeholder="{{trans('faqs.enter_answer_ar')}}"
-                                                                  name="answer_ar"
-                                                                  id="answer_ar">{{$faq->answer_ar}}</textarea>
-                                                        <span class="form-text text-danger"
-                                                              id="answer_ar_error"></span>
-                                                    </div>
-                                                    <!--end::Group-->
-
-                                                    <!--begin::Group-->
-                                                    <div class="form-group">
-                                                        <label> {{trans('faqs.answer_en')}}</label>
-                                                        <textarea class="form-control answer_en"
-                                                                  placeholder="{{trans('faqs.enter_answer_en')}}"
-                                                                  name="answer_en"
-                                                                  id="answer_en">{{$faq->answer_en}}</textarea>
-                                                        <span class="form-text text-danger"
-                                                              id="answer_en_error"></span>
-                                                    </div>
-                                                    <!--end::Group-->
-
                                                 </div>
                                                 <!--begin::body-->
 
@@ -208,44 +266,32 @@
 @push('js')
     <script type="text/javascript">
         //////////////////////////////////////////////////////
-        /// summernote
-        $('.answer_ar').summernote({
-            height: 270,   //set editable area's height
-            codemirror: { // codemirror options
-                theme: 'monokai'
-            },
+        var user_photo = new KTImageInput('kt_user_photo');
 
 
-        });
-        $('.answer_en').summernote({
-            height: 270,   //set editable area's height
-            codemirror: { // codemirror options
-                theme: 'monokai'
-            }
-        });
+        /////////////////////////////////////////////////////////
+        // Update User
 
-
-        //////////////////////////////////////////////////////////////////////////
-        // Store
-        $('#form_faq_update').on('submit', function (e) {
+        $('#form_user_update').on('submit', function (e) {
             e.preventDefault();
-            $.notifyClose();
-            //////////////////////////////////////////////////////////////
-            $('#question_ar_error').text('');
-            $('#question_en_error').text('');
-            $('#answer_ar_error').text('');
-            $('#answer_en_error').text('');
+            ////////////////////////////////////////////////////
+            $('#name_error').text('');
+            $('#email_error').text('');
+            $('#password_error').text('');
+            $('#photo_error').text('');
+            $('#mobile_error').text('');
+            $('#gender_error').text('');
 
-            $('#question_ar').css('border-color', '');
-            $('#question_en').css('border-color', '');
-            $('#answer_ar').css('border-color', '');
-            $('#answer_en').css('border-color', '');
-            //////////////////////////////////////////////////////////////
-
-
+            $('#name').css('border-color', '');
+            $('#email').css('border-color', '');
+            $('#password').css('border-color', '');
+            $('#photo').css('border-color', '');
+            $('#mobile').css('border-color', '');
+            $('#gender').css('border-color', '');
+            ////////////////////////////////////////////////////
             var data = new FormData(this);
-            var url = $(this).attr('action');
             var type = $(this).attr('method');
+            var url = $(this).attr('action');
 
             $.ajax({
                 url: url,
@@ -253,8 +299,8 @@
                 type: type,
                 dataType: 'JSON',
                 contentType: false,
-                cache: false,
                 processData: false,
+                cache: false,
                 beforeSend: function () {
                     KTApp.blockPage({
                         overlayColor: '#000000',
@@ -265,35 +311,32 @@
                         KTApp.unblockPage();
                     }, 1500);
                 },
-
                 success: function (data) {
                     console.log(data);
                     if (data.status == true) {
-                        notifySuccessOrError(data.msg, 'success');
-                        setTimeout(function () {
-                            window.location.href = "{{route('admin.faqs')}}";
-                        }, 2500)
+                        Swal.fire(data.msg, "", "success");
+                        $('.swal2-confirm').click(function(){
+                            window.location.href = "{{route('users')}}";
+                        });
                     }
                 },
-
                 error: function (reject) {
-                    $.notifyClose();
                     var response = $.parseJSON(reject.responseText);
                     $.each(response.errors, function (key, value) {
                         $('#' + key + '_error').text(value[0]);
                         $('#' + key).css('border-color', 'red');
-                        $('body,html').animate({scrollTop: 20}, 300);
-                    });
-                },
+                        $('body,html').animate({scrollTop: 30}, 200);
+                    })
 
+                },
                 complete: function () {
                     KTApp.unblockPage();
-                }
+                },
             })
 
-        });
+        })
+
 
     </script>
 @endpush
-
 

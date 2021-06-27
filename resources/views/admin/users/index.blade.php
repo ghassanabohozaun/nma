@@ -31,7 +31,7 @@
 
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
-                <a href=""
+                <a href="{!! route('user.create') !!}"
                    class="btn btn-primary btn-sm font-weight-bold font-size-base  mr-1">
                     <i class="fa fa-plus-square"></i>
                     {{trans('menu.add_new_user')}}

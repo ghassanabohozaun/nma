@@ -34,5 +34,7 @@ return [
     'password_min' => 'يجب ان كلمة المرور اكبر من 6 حروف',
 
     'login_failed' => 'فشل عملية تسجيل الدخول',
+    'account_unavailable'=>'الحساب غير متوفر',
+    'account_disabled'=>'الحساب معطل',
 
 ];
