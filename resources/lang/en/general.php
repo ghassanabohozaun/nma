@@ -40,10 +40,15 @@ return [
     'administrative_report' => 'Administrative Report',
     'male' => 'Male',
     'female' => 'Female',
-    'others'=>'Others',
+    'others' => 'Others',
     'none' => 'None',
-    'deleted'=>'Deleted!',
-    'cancelled'=>'Cancelled!',
+    'deleted' => 'Deleted!',
+    'cancelled' => 'Cancelled!',
+    'trashed' => 'Trashed',
+    'not_trashed' => 'Not Trashed',
+    'deleted_at' => 'Deleted Status',
+    'force_delete' => 'Force Delete',
+    'restore' => 'Restore',
 
     'change_image' => 'Change image',
     'image_format_allow' => 'Allowed file types jpg,jpeg,png',
@@ -51,11 +56,15 @@ return [
     'delete_success_message' => ' deleted Successfully',
     'update_success_message' => ' updated Successfully',
     'upload_success_message' => ' Upload Successfully',
+    'restore_success_message' => ' restored Successfully',
+
     'internal_server_error_message' => 'Sorry, Internal server Error ',
     'try_catch_error_message' => 'Sorry, There is an error, please try again later',
     'error_message' => 'Sorry, There is an error',
 
     'ask_delete_record' => 'Do You Want To Delete This Record ? ',
+    'ask_permanent_delete_record'=> 'Do You Want To Permanent Delete This Record ? ',
+
     'change_status_success_message' => 'change Status Successfully',
     'export' => 'Export',
     'print' => 'Print',
@@ -79,6 +88,6 @@ return [
     'processing' => 'processing ...',
     'loadingRecords' => 'loading Records ...',
     'comments' => 'Comments',
-    'captcha'=>'Please Check Captcha ',
+    'captcha' => 'Please Check Captcha ',
 
 ];

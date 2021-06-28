@@ -25,7 +25,6 @@ class AdminUpdateRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'email'=>'required|email',
             'password'=>'sometimes|nullable|min:6',
         ];
     }

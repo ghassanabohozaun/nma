@@ -19,7 +19,7 @@
                     </li>
 
                     <li class="breadcrumb-item">
-                        <a href="" class="text-muted">
+                        <a href="{!! route('users.trashed') !!}" class="text-muted">
                             {{trans('menu.show_all')}}
                         </a>
                     </li>
@@ -29,16 +29,7 @@
             </div>
             <!--end::Info-->
 
-            <!--begin::Toolbar-->
-            <div class="d-flex align-items-center">
-                <a href="{!! route('user.create') !!}"
-                   class="btn btn-primary btn-sm font-weight-bold font-size-base  mr-1">
-                    <i class="fa fa-plus-square"></i>
-                    {{trans('menu.add_new_user')}}
-                </a>
-                &nbsp;
-            </div>
-            <!--end::Toolbar-->
+
         </div>
     </div>
     <!--end::Subheader-->
@@ -70,7 +61,6 @@
                                                     <th>@lang('users.mobile')</th>
                                                     <th>@lang('users.gender')</th>
                                                     <th>@lang('users.last_login_at')</th>
-                                                    <th>@lang('users.status')</th>
                                                     <th>@lang('general.actions')</th>
                                                 </tr>
                                                 </thead>
@@ -113,7 +103,7 @@
     <script src="{{asset('adminBoard/assets/js/data_table.js')}}" type="text/javascript"></script>
 
     <script>
-        window.data_url = "{{route('get.users')}}";
+        window.data_url = "{{route('get.trashed.users')}}";
         window.columns = [{data: "id"},
             {data: "photo"},
             {data: "name"},
@@ -121,7 +111,6 @@
             {data: "mobile"},
             {data: "gender"},
             {data: "last_login_at"},
-            {data: "status"},
             {data: "actions"}
         ];
     </script>
@@ -130,13 +119,13 @@
 
 
         ///////////////////////////////////////////////////
-        /// Show user Delete Notify
-        $(document).on('click', '.delete_user_btn', function (e) {
+        /// Delete user
+        $(document).on('click', '.force_delete_user_btn', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
 
             Swal.fire({
-                title: "{{trans('general.ask_delete_record')}}",
+                title: "{{trans('general.ask_permanent_delete_record')}}",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonText: "{{trans('general.yes')}}",
@@ -148,7 +137,7 @@
                     //////////////////////////////////////
                     // Delete User
                     $.ajax({
-                        url: '{!! route('user.destroy') !!}',
+                        url: '{!! route('user.force.delete') !!}',
                         data: {id, id},
                         type: 'post',
                         dataType: 'json',
@@ -179,80 +168,17 @@
                     })
                 }
             });
-
-            /* $.notifyClose();
-             var id = $(this).data('id');
-             $('#user_delete_id').val(id);
-
-             $.notifyClose();
-             notify_message = " <i class='fa fa-trash' style='color:white'></i> &nbsp; <br /><br />" +
-                "<button type='button' id='btn_user_delete'  class=' btn btn-outline-light btn-sm m-btn m-btn--air m-btn--wide '" +
-                ">{{trans('general.yes')}}</button> &nbsp;" +
-                "<button type='button' id='btn_user_close' class=' btn btn-outline-light btn-sm m-btn m-btn--air m-btn--wide '" +
-                ">{{trans('general.no')}}</button>"
-
-            notifyDelete(notify_message, 'danger')
-*/
-        })
-
-        ///////////////////////////////////////////////////
-        /// close user Delete Notify
-        $('body').on('click', '#btn_user_close', function (e) {
-            e.preventDefault();
-            $.notifyClose();
-            $('#user_delete_id').val('');
-        })
-
-        ///////////////////////////////////////////////////
-        /// Delete user
-        $('body').on('click', '#btn_user_delete', function (e) {
-            e.preventDefault();
-            $.notifyClose();
-
-            var id = $('#user_delete_id').val();
-            $.ajax({
-                url: '{!! route('user.destroy') !!}',
-                data: {id, id},
-                type: 'post',
-                dataType: 'json',
-                beforeSend: function () {
-                    KTApp.blockPage({
-                        overlayColor: '#000000',
-                        state: 'danger',
-                        message: "{{trans('general.please_wait')}}",
-                    });
-                    setTimeout(function () {
-                        KTApp.unblockPage();
-                    }, 1500);
-                },//end beforeSend
-                success: function (data) {
-                    console.log(data);
-                    if (data.status == true) {
-                        notifySuccessOrError(data.msg, 'success');
-                        updateDataTable();
-                        $('#user_delete_id').val('');
-                    }
-                    if (data.status == false) {
-                        notifySuccessOrError(data.msg, 'warning');
-                    }
-
-                },//end success
-                complete: function () {
-                    KTApp.unblockPage();
-                },//end complete
-            })
         })
 
 
         ////////////////////////////////////////////////////
-        // Change Status
-        $('body').on('click', '.change_status', function (e) {
+        // restore user
+        $(document).on('click', '.restore_user_btn', function (e) {
             e.preventDefault();
-            $.notifyClose();
             var id = $(this).data('id');
 
             $.ajax({
-                url: "{{route('user.change.status')}}",
+                url: "{{route('user.restore')}}",
                 data: {id, id},
                 type: 'post',
                 dataType: 'JSON',
@@ -264,15 +190,16 @@
                             text: "",
                             icon: "success",
                             allowOutsideClick: false,
-                            customClass: {confirmButton: 'update_user_status_button'}
+                            customClass: {confirmButton: 'restore_user_button'}
                         });
-                        $('.update_user_status_button').click(function () {
+                        $('.restore_user_button').click(function () {
                             updateDataTable();
                         });
                     }
                 },//end success
             })
         })
+
 
 
     </script>

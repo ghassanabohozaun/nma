@@ -51,7 +51,10 @@ Route::group([
         Route::post('store', 'UserController@store')->name('user.store');
         Route::get('/edit/{id?}', 'UserController@edit')->name('user.edit');
         Route::post('update', 'UserController@update')->name('user.update');
-
+        Route::get('/trashed-user', 'UserController@trashedUser')->name('users.trashed');
+        Route::get('/get-trashed-users', 'UserController@getTrashedUsers')->name('get.trashed.users');
+        Route::post('/force-delete', 'UserController@forceDelete')->name('user.force.delete');
+        Route::post('/restore', 'UserController@restore')->name('user.restore');
     });
 
 

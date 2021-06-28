@@ -154,7 +154,7 @@
                                                         <div class="col-lg-9 col-xl-9">
                                                             <input
                                                                 class="form-control form-control-solid form-control-lg"
-                                                                name="password" id="password" type="text"
+                                                                name="password" id="password" type="password"
                                                                 placeholder=" {{trans('users.enter_password')}}"
                                                                 autocomplete="off"/>
                                                             <span class="form-text text-danger"

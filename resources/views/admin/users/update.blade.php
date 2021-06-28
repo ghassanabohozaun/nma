@@ -1,14 +1,5 @@
 @extends('layouts.admin')
 @section('title') @endsection
-@push('css')
-    <style>
-        .form-control:disabled, .form-control[readonly] {
-            background-color: #bec5c7;
-            opacity: 1;
-            color: #0b2e13;
-        }
-    </style>
-@endpush
 @section('content')
 
     <form class="form" action="{{route('user.update')}}" method="POST"

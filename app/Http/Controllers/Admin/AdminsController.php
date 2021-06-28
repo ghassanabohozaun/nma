@@ -17,7 +17,8 @@ class AdminsController extends Controller
     /// index
     public function index()
     {
-        $admin = Admin::first();
+        $id = admin()->user()->id;
+        $admin = Admin::find($id);
         $title = trans('menu.admin');
         return view('admin.admin.index', compact('title', 'admin'));
     }
@@ -68,15 +69,14 @@ class AdminsController extends Controller
 
             $admin->update([
                 'name' => $request->name,
-                'email' => $request->email,
                 'photo' => $photo_path,
                 'password' => $password,
             ]);
 
 
-            
-            
-            
+
+
+
             return $this->returnSuccessMessage(trans('general.update_success_message'));
         } catch (\Exception $exception) {
             return $this->returnError(trans('general.try_catch_error_message'), '500');

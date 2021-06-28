@@ -48,7 +48,11 @@ return [
     'none'=>'بدون',
     'deleted'=>'حذف!',
     'cancelled'=>'الغاء!',
-
+    'trashed'=>'محذوف',
+    'not_trashed'=>'غير محذوف',
+    'deleted_at'=>'حالة الحذف',
+    'force_delete'=>'حذف نهائي',
+    'restore'=>'استرجاع',
 
     'change_image'=>'تغير الصورة',
     'image_format_allow'=>'صيغ الصور المسموح بها هي jpg ,jpeg, png فقط',
@@ -56,11 +60,14 @@ return [
     'delete_success_message'=>'تمت عملية الحذف بنجاح',
     'update_success_message'=>'تمت عملية التعديل بنجاح',
     'upload_success_message'=>'تمت عملية الرفع بنجاح',
+    'restore_success_message'=>'تمت عملية الاسترجاع بنجاح',
     'internal_server_error_message'=>'عذراً , خطأ داخلي في الخادم ',
     'try_catch_error_message'=>'عذراً , هتالك خطأ ما يرجي المحاولة فيما بعد  ',
     'error_message'=>'عذراً , هتالك خطأ ما',
 
     'ask_delete_record'=>'هل تريد حذف هذا السجل ؟ ',
+    'ask_permanent_delete_record'=>'هل تريد حذف هذا السجل نهائياً؟ ',
+
     'change_status_success_message'=>'تمت عملية تغير الحالة بنجاح',
     'export'=>'تصدير',
     'print'=>'طباعة',

@@ -67,15 +67,56 @@
             </li>
 
             <!------------------------------------ Users    ---------------------------------------------------->
-            <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                <a href="{{route('users')}}" class="menu-link menu-toggle">
+
+            <li class="menu-item  menu-item-submenu
+                 @if(str_contains(url()->current(), '/users')) menu-item-open @endif"
+                aria-haspopup="true" data-menu-toggle="hover">
+                <a href="javascript:;" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
                         <i class="fas fa-users"></i>
                     </span>
                     <span class="menu-text">{{trans('menu.users')}}</span>
-                </a>
-            </li>
+                    <i class="menu-arrow"></i>
+                    <span class="menu-label">
+                        <span class="label label-rounded label-warning">
+                           {{App\Models\Admin::withTrashed()->count()}}
+                        </span>
+                    </span>
 
+                </a>
+                <div class="menu-submenu ">
+                    <i class="menu-arrow"></i>
+                    <ul class="menu-subnav">
+                        <li class="menu-item  menu-item-parent" aria-haspopup="true">
+                            <span class="menu-link">
+                                <span class="menu-text">{{trans('menu.users')}}</span>
+                            </span>
+                        </li>
+                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="{{route('users')}}" class="menu-link menu-toggle">
+                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                <span class="menu-text">{{trans('menu.users')}}</span>
+                                <span class="menu-label">
+                                    <span class="label label-rounded label-warning">
+                                        {{App\Models\Admin::withoutTrashed()->count()}}
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="{{route('users.trashed')}}" class="menu-link menu-toggle">
+                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                <span class="menu-text">{{trans('menu.trashed_users')}}</span>
+                                <span class="menu-label">
+                                    <span class="label label-rounded label-warning">
+                                        {{App\Models\Admin::onlyTrashed()->count()}}
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
             <!------------------------------------ About SPA    ---------------------------------------------------->
             <li class="menu-item  menu-item-submenu"
                 aria-haspopup="true" data-menu-toggle="hover">

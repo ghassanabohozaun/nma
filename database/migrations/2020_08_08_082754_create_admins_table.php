@@ -20,11 +20,12 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->string('photo')->nullable();
             $table->string('mobile')->nullable();
-            $table->enum('gender' , ['male', 'female'])->default('male');
+            $table->enum('gender', ['male', 'female'])->default('male');
             $table->enum('status', ['0', '1'])->default('0');
             $table->datetime('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
             $table->string('remember_token')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

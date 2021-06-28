@@ -232,8 +232,8 @@
                                                 </label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <input
-                                                        class="form-control form-control-solid form-control-lg"
-                                                        name="email" id="email" type="email"
+                                                        class="form-control form-control-solid form-control-lg "
+                                                        name="email" id="email" type="email" disabled="disabled"
                                                         placeholder=" {{trans('login.enter_email')}}"
                                                         autocomplete="off"/>
                                                     <span class="form-text text-danger" id="email_error"></span>
@@ -353,10 +353,19 @@
                 success: function (data) {
                     console.log(data);
                     if (data.status == true) {
-                        notifySuccessOrError(data.msg, 'success');
-                        $('.card_admin_id').load(location.href + ' .card_admin_id');
-                        $('#model_admin_update').modal('hide');
+                        Swal.fire({
+                            title: data.msg,
+                            text: "",
+                            icon: "success",
+                            allowOutsideClick: false,
+                            customClass: { confirmButton: 'update_admin_button' }
+                        });
+                        $('.update_admin_button').click(function () {
+                            $('.card_admin_id').load(location.href + ' .card_admin_id');
+                            $('#model_admin_update').modal('hide');
+                        });
                     }
+
                 },//end success
 
 

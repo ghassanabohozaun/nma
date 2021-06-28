@@ -10,6 +10,7 @@ return [
     'show_all' => 'Show All',
     'users'=>'Users',
     'add_new_user'=>'Add New User',
+    'trashed_users'=>'Trashed Users',
 
 
 

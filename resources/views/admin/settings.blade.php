@@ -667,10 +667,18 @@
                 success: function (data) {
                     console.log(data);
                     if (data.status == true) {
-                        $.notifyClose();
-                        notifySuccessOrError(data.msg, 'success');
-                        $('html, body').animate({scrollTop: 20}, 300);
+                        Swal.fire({
+                            title: data.msg,
+                            text: "",
+                            icon: "success",
+                            allowOutsideClick: false,
+                            customClass: { confirmButton: 'update_settings_button' }
+                        });
+                        $('.update_settings_button').click(function () {
+                            $('html, body').animate({scrollTop: 20}, 300);
+                        });
                     }
+
                 },// end success
 
                 error: function (reject) {
