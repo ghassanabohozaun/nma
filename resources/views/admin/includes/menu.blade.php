@@ -8,8 +8,9 @@
         <!--begin::Menu Nav-->
 
         <ul class="menu-nav ">
-            <li class="menu-item  menu-item-active" aria-haspopup="true" style="height: 40px;">
-                <a href="{{route('admin.dashboard')}}" class="menu-link ">
+            @can('dashboard')
+                <li class="menu-item  menu-item-active" aria-haspopup="true" style="height: 40px;">
+                    <a href="{{route('admin.dashboard')}}" class="menu-link ">
                     <span class="svg-icon menu-icon">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -24,13 +25,11 @@
                                         </g>
                      </svg><!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">{{trans('menu.dashboard')}}</span></a>
-            </li>
-            <li class="menu-section" style="margin-bottom: -10px">
-
-            </li>
-
-            <!------------------------------------ home     ---------------------------------------------------->
+                        <span class="menu-text">{{trans('menu.dashboard')}}</span></a>
+                </li>
+                <li class="menu-section" style="margin-bottom: -10px"></li>
+            @endcan
+        <!------------------------------------ home     ---------------------------------------------------->
             <li class="menu-item  menu-item-submenu
                         @if(str_contains(url()->current(), 'settings')
                             || str_contains(url()->current(), '/admin/admin')) menu-item-open @endif"
@@ -48,360 +47,98 @@
                     <ul class="menu-subnav">
 
 
-                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                            <a href="{{route('get.admin.settings')}}" class="menu-link menu-toggle">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.settings')}}</span>
-                            </a>
-                        </li>
+                        @can('settings')
+                            <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{route('get.admin.settings')}}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                    <span class="menu-text">{{trans('menu.settings')}}</span>
+                                </a>
+                            </li>
+                        @endcan
 
-                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                            <a href="{{route('get.admin')}}" class="menu-link menu-toggle">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.admin')}}</span>
-                            </a>
-                        </li>
+                        @can('admins')
+                            <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{route('get.admin')}}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                    <span class="menu-text">{{trans('menu.admin')}}</span>
+                                </a>
+                            </li>
+                        @endcan
 
                     </ul>
                 </div>
             </li>
-
+                <!------------------------------------ Roles  ---------------------------------------------------->
+                @can('roles')
+                    <li class="menu-item  menu-item-submenu"
+                        aria-haspopup="true" data-menu-toggle="hover">
+                        <a href="{!! route('admin.roles') !!}" class="menu-link menu-toggle">
+                    <span class="svg-icon menu-icon">
+                        <i class="fa fa-user-lock"></i>
+                    </span>
+                            <span class="menu-text">{{trans('menu.permissions')}}</span>
+                            <span class="menu-label">
+                        <span class="label label-rounded label-success">
+                             {{App\Models\Role::count()}}
+                        </span>
+                    </span>
+                        </a>
+                    </li>
+                @endcan
             <!------------------------------------ Users    ---------------------------------------------------->
-
-            <li class="menu-item  menu-item-submenu
+            @can('users')
+                <li class="menu-item  menu-item-submenu
                  @if(str_contains(url()->current(), '/users')) menu-item-open @endif"
-                aria-haspopup="true" data-menu-toggle="hover">
-                <a href="javascript:;" class="menu-link menu-toggle">
+                    aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
                         <i class="fas fa-users"></i>
                     </span>
-                    <span class="menu-text">{{trans('menu.users')}}</span>
-                    <i class="menu-arrow"></i>
-                    <span class="menu-label">
-                        <span class="label label-rounded label-warning">
+                        <span class="menu-text">{{trans('menu.users')}}</span>
+                        <i class="menu-arrow"></i>
+                        <span class="menu-label">
+                        <span class="label label-rounded label-info">
                            {{App\Models\Admin::withTrashed()->count()}}
                         </span>
                     </span>
 
-                </a>
-                <div class="menu-submenu ">
-                    <i class="menu-arrow"></i>
-                    <ul class="menu-subnav">
-                        <li class="menu-item  menu-item-parent" aria-haspopup="true">
+                    </a>
+                    <div class="menu-submenu ">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item  menu-item-parent" aria-haspopup="true">
                             <span class="menu-link">
                                 <span class="menu-text">{{trans('menu.users')}}</span>
                             </span>
-                        </li>
-                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                            <a href="{{route('users')}}" class="menu-link menu-toggle">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.users')}}</span>
-                                <span class="menu-label">
-                                    <span class="label label-rounded label-warning">
+                            </li>
+                            <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{route('users')}}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                    <span class="menu-text">{{trans('menu.users')}}</span>
+                                    <span class="menu-label">
+                                    <span class="label label-rounded label-info">
                                         {{App\Models\Admin::withoutTrashed()->count()}}
                                     </span>
                                 </span>
-                            </a>
-                        </li>
-                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                            <a href="{{route('users.trashed')}}" class="menu-link menu-toggle">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.trashed_users')}}</span>
-                                <span class="menu-label">
-                                    <span class="label label-rounded label-warning">
+                                </a>
+                            </li>
+                            <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                <a href="{{route('users.trashed')}}" class="menu-link menu-toggle">
+                                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                    <span class="menu-text">{{trans('menu.trashed_users')}}</span>
+                                    <span class="menu-label">
+                                    <span class="label label-rounded label-info">
                                         {{App\Models\Admin::onlyTrashed()->count()}}
                                     </span>
                                 </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <!------------------------------------ About SPA    ---------------------------------------------------->
-            <li class="menu-item  menu-item-submenu"
-                aria-haspopup="true" data-menu-toggle="hover">
-                <a href="{{route('admin.about.spa')}}" class="menu-link menu-toggle">
-                    <span class="svg-icon menu-icon">
-                        <i class="fab fa-readme"></i>
-                    </span>
-                    <span class="menu-text">{{trans('menu.about_spa')}}</span>
-                    <span class="menu-label">
-                        <span class="label label-rounded label-light-primary">
-                           {{\App\Models\AboutSPA::count()}}
-                        </span>
-                    </span>
-                </a>
-            </li>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            @endcan
+            <!------------------------------------ Users    ---------------------------------------------------->
 
-
-            <!------------------------------------ Services     ---------------------------------------------------->
-            <li class="menu-item  menu-item-submenu
-                 @if(str_contains(url()->current(), '/services') || str_contains(url()->current(), '/treatment-areas'))
-                menu-item-open @endif"
-                aria-haspopup="true" data-menu-toggle="hover">
-                <a href="javascript:;" class="menu-link menu-toggle">
-                    <span class="svg-icon menu-icon">
-                        <i class="flaticon-squares-1"></i>
-                    </span>
-                    <span class="menu-text">{{trans('menu.services')}}</span>
-                    <i class="menu-arrow"></i>
-                    <span class="menu-label">
-                        <span class="label label-rounded label-warning">
-                           {{App\Models\Service::count()}}
-                        </span>
-                    </span>
-
-                </a>
-                <div class="menu-submenu ">
-                    <i class="menu-arrow"></i>
-                    <ul class="menu-subnav">
-                        <li class="menu-item  menu-item-parent" aria-haspopup="true">
-                            <span class="menu-link">
-                                <span class="menu-text">{{trans('menu.services')}}</span>
-                            </span>
-                        </li>
-                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                            <a href="{{route('admin.services')}}" class="menu-link menu-toggle">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.services')}}</span>
-                                <span class="menu-label">
-                                    <span class="label label-rounded label-warning">
-                                        {{App\Models\Service::where('is_treatment_area','=','0')->count()}}
-                                    </span>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                            <a href="{{route('admin.treatment.areas')}}" class="menu-link menu-toggle">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.treatment_areas')}}</span>
-                                <span class="menu-label">
-                                    <span class="label label-rounded label-warning">
-                                       {{App\Models\Service:: where('is_treatment_area','=','1')->count()}}
-                                    </span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <!------------------------------------ Trainings   ---------------------------------------------------->
-            <li class="menu-item  menu-item-submenu"
-                aria-haspopup="true" data-menu-toggle="hover">
-                <a href="{{route('admin.trainings')}}" class="menu-link menu-toggle">
-                    <span class="svg-icon menu-icon">
-                        <i class="flaticon2-talk"></i>
-                    </span>
-                    <span class="menu-text">{{trans('menu.trainings')}}</span>
-                    <span class="menu-label">
-                        <span class="label label-rounded label-dark">
-                          {{\App\Models\Training::count()}}
-                        </span>
-                    </span>
-                </a>
-            </li>
-
-
-            <!------------------------------------ Publications     ---------------------------------------------------->
-            <li class="menu-item  menu-item-submenu
-                 @if(str_contains(url()->current(), '/sections')||str_contains(url()->current(), '/publications'))
-                menu-item-open @endif"
-                aria-haspopup="true" data-menu-toggle="hover">
-                <a href="javascript:;" class="menu-link menu-toggle">
-                    <span class="svg-icon menu-icon">
-                        <i class="flaticon-list"></i>
-                    </span>
-                    <span class="menu-text">{{trans('menu.publications')}}</span>
-                    <i class="menu-arrow"></i>
-                    <span class="menu-label">
-                        <span class="label label-rounded label-success">
-                           {{App\Models\Publication::count() + App\Models\Section::count()}}
-                        </span>
-                    </span>
-                </a>
-                <div class="menu-submenu ">
-                    <i class="menu-arrow"></i>
-                    <ul class="menu-subnav">
-                        <li class="menu-item  menu-item-parent" aria-haspopup="true">
-                            <span class="menu-link">
-                                <span class="menu-text">{{trans('menu.publications_and_sections')}}</span>
-                            </span>
-                        </li>
-                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                            <a href="{{route('admin.publications')}}" class="menu-link menu-toggle">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.publications')}}</span>
-                                <span class="menu-label">
-                                    <span class="label label-rounded label-success">
-                                       {{App\Models\Publication::count()}}
-                                    </span>
-                                </span>
-                            </a>
-                        </li>
-
-                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                            <a href="{{ route('admin.sections') }}" class="menu-link menu-toggle">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.sections')}}</span>
-                                <span class="menu-label">
-                                    <span class="label label-rounded label-success">
-                                       {{App\Models\Section::count()}}
-                                    </span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-
-            <!------------------------------------ Clients Opinions     ---------------------------------------------------->
-            <li class="menu-item  menu-item-submenu"
-                aria-haspopup="true" data-menu-toggle="hover">
-                <a href="{{route('admin.clients.opinions')}}" class="menu-link menu-toggle">
-                    <span class="svg-icon menu-icon">
-                        <i class="flaticon2-chat-2"></i>
-                    </span>
-                    <span class="menu-text">{{trans('menu.clients_opinions')}}</span>
-                    <span class="menu-label">
-                        <span class="label label-rounded label-info">
-                           {{App\Models\ClientOpinion::count()}}
-                        </span>
-                    </span>
-                </a>
-            </li>
-
-
-            <!------------------------------------ Medias    ---------------------------------------------------->
-            <li class="menu-item  menu-item-submenu @if(str_contains(url()->current(), '/medias')) menu-item-open @endif"
-                aria-haspopup="true" data-menu-toggle="hover">
-                <a href="javascript:;" class="menu-link menu-toggle">
-                    <span class="svg-icon menu-icon">
-                     <i class="fa fa-photo-video"></i>
-                    </span>
-                    <span class="menu-text">{{trans('menu.media')}}</span>
-                    <i class="menu-arrow"></i>
-                    <span class="menu-label">
-                        <span class="label label-rounded label-light-dark">
-                                       {{App\Models\Slider::count() + App\Models\Video::count() + App\Models\PhotoAlbum::count() }}
-                        </span>
-                    </span>
-                </a>
-                <div class="menu-submenu ">
-                    <!-----------------~~~~~~~~~~  Sliders  ~~~~~~~~~~~~~-------------------------------->
-                    <i class="menu-arrow"></i>
-                    <ul class="menu-subnav">
-                        <li class="menu-item  menu-item-parent" aria-haspopup="true">
-                            <span class="menu-link"><span class="menu-text">{{trans('menu.media')}}</span>
-                            </span>
-                        </li>
-                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                            <a href="{{route('admin.sliders')}}" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.sliders')}}</span>
-                                <span class="menu-label">
-                                    <span class="label label-rounded label-light-dark">
-                                       {{App\Models\Slider::count()}}
-                                    </span>
-                                </span>
-                            </a>
-                        </li>
-
-                    </ul>
-
-
-                    <!-----------------~~~~~~~~~~  Videos  ~~~~~~~~~~~~~----------------------------------->
-                    <i class="menu-arrow"></i>
-                    <ul class="menu-subnav">
-                        <li class="menu-item  menu-item-parent" aria-haspopup="true">
-                            <span class="menu-link"><span class="menu-text">{{trans('menu.videos')}}</span>
-                            </span>
-                        </li>
-                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                            <a href="{{route('admin.videos')}}" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.videos')}}</span>
-                                <span class="menu-label">
-                                    <span class="label label-rounded label-light-dark">
-                                       {{App\Models\Video::count()}}
-                                    </span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-----------------~~~~~~~~~~  Photo Albums  ~~~~~~~~~~~~~------------------------------->
-                    <i class="menu-arrow"></i>
-                    <ul class="menu-subnav">
-                        <li class="menu-item  menu-item-parent" aria-haspopup="true">
-                            <span class="menu-link"><span class="menu-text">{{trans('menu.photo_albums')}}</span>
-                            </span>
-                        </li>
-                        <li class="menu-item  menu-item-submenu" data-menu-toggle="hover">
-                            <a href="{{route('admin.photo.albums')}}" class="menu-link">
-                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                <span class="menu-text">{{trans('menu.photo_albums')}}</span>
-                                <span class="menu-label">
-                                    <span class="label label-rounded label-light-dark">
-                                       {{App\Models\PhotoAlbum::count()}}
-                                    </span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-
-            <!------------------------------------ Communication Requests   fas fa-mail-bulk  -------------------------------------------------
-            <li class="menu-item  menu-item-submenu"
-                aria-haspopup="true" data-menu-toggle="hover">
-                <a href="{{--route('admin.communication.requests')--}}" class="menu-link menu-toggle">
-                    <span class="svg-icon menu-icon">
-                        <i class="fas fa-mail-bulk"></i>
-                    </span>
-                    <span class="menu-text">{{--trans('menu.communication_requests')--}}</span>
-                    <span class="menu-label">
-                        <span class="label label-rounded label-primary">
-                           {{--App\Models\CommunicationRequest::count()--}}
-                        </span>
-                    </span>
-                </a>
-            </li>
-
-
-            ----------------------------------- Tests And Metrics ---------------------------------------------------->
-
-            <li class="menu-item  menu-item-submenu"
-                aria-haspopup="true" data-menu-toggle="hover">
-                <a href="{{route('admin.tests')}}" class="menu-link">
-                    <span class="svg-icon menu-icon">
-                        <i class="fa fa-question"></i>
-                    </span>
-                    <span class="menu-text">{{trans('menu.tests_and_metrics')}}</span>
-                    <span class="menu-label">
-                            <span class="label label-rounded label-light-danger">
-                               {{App\Models\Tests\Test::count()}}
-                            </span>
-                    </span>
-                </a>
-            </li>
-
-            <!------------------------------------ FAQ's     ---------------------------------------------------->
-            <li class="menu-item  menu-item-submenu"
-                aria-haspopup="true" data-menu-toggle="hover">
-                <a href="{{route('admin.faqs')}}" class="menu-link menu-toggle">
-                    <span class="svg-icon menu-icon">
-                        <i class="flaticon-questions-circular-button"></i>
-                    </span>
-                    <span class="menu-text">{{trans('menu.faqs')}}</span>
-                    <span class="menu-label">
-                        <span class="label label-rounded label-danger">
-                           {{\App\Models\Faq::count()}}
-                        </span>
-                    </span>
-                </a>
-            </li>
 
 
         </ul>

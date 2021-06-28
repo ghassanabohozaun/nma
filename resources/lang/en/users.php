@@ -12,6 +12,7 @@ return [
     'gender' => 'Gender',
     'last_login_at' => 'Last Login At',
     'last_login_ip' => 'Last Login IP',
+    'role_id'=>'Role',
 
     'enter_name' => 'Enter Name',
     'enter_email' => 'Enter Email',

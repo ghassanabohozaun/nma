@@ -67,6 +67,7 @@
                                                     <th>@lang('users.photo')</th>
                                                     <th>@lang('users.name')</th>
                                                     <th>@lang('users.email')</th>
+                                                    <th>@lang('users.role_id')</th>
                                                     <th>@lang('users.mobile')</th>
                                                     <th>@lang('users.gender')</th>
                                                     <th>@lang('users.last_login_at')</th>
@@ -118,6 +119,7 @@
             {data: "photo"},
             {data: "name"},
             {data: "email"},
+            {data: "role_id"},
             {data: "mobile"},
             {data: "gender"},
             {data: "last_login_at"},

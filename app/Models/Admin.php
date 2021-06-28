@@ -21,6 +21,7 @@ class Admin extends Authenticatable
         'mobile',
         'gender',
         'status',
+        'role_id',
         'last_login_at',
         'last_login_ip',
         'remember_token'
@@ -31,6 +32,11 @@ class Admin extends Authenticatable
     public function posts()
     {
         return $this->hasMany('App\Models\Post', 'admin_id', 'id');
+    }
+    /////////////////////////////////////////////////////////////////////
+    /// role
+    public function role(){
+        return $this->belongsTo(Role::class,'role_id');
     }
 
     //////////////////////////////////// accessors ///////////////////////
@@ -43,4 +49,22 @@ class Admin extends Authenticatable
             return trans('general.female');
         }
     }
+
+
+    public function hasAbility($permissions){
+        $role = $this->role;
+        if(!$role){
+            return false;
+        }
+
+        foreach($role->permissions as $permission){
+            if(is_array($permissions) && in_array($permission, $permissions)){
+                return true;
+            }else if (is_string($permissions) && strcmp($permissions ,$permission)==0){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

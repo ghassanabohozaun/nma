@@ -182,6 +182,39 @@
                                                     </div>
                                                     <!--end::Group-->
 
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.role_id')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+
+                                                            <select
+                                                                class="form-control form-control-solid form-control-lg"
+                                                                name="role_id" id="role_id" type="text">
+
+                                                                <option value="">
+                                                                    {{trans('general.select_from_list')}}
+                                                                </option>
+
+                                                                @if($roles && $roles->count()>0)
+                                                                    @foreach($roles as $role)
+                                                                        <option
+                                                                            value="{!! $role->id !!}"
+                                                                            {{$user->role_id ==old('role_id', $role->id) ?'selected':''}}>
+                                                                            {!! $role->name !!}
+                                                                        </option>
+                                                                    @endforeach
+                                                                @endif
+
+                                                            </select>
+                                                            <span class="form-text text-danger"
+                                                                  id="role_id_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">
@@ -306,12 +339,12 @@
                     console.log(data);
                     if (data.status == true) {
                         Swal.fire({
-                                title: data.msg,
-                                text: "",
-                                icon: "success",
-                                allowOutsideClick: false,
-                                customClass: { confirmButton: 'update_user_button' }
-                            });
+                            title: data.msg,
+                            text: "",
+                            icon: "success",
+                            allowOutsideClick: false,
+                            customClass: {confirmButton: 'update_user_button'}
+                        });
                         $('.update_user_button').click(function () {
                             window.location.href = "{{route('users')}}";
                         });

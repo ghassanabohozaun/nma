@@ -166,6 +166,36 @@
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('users.role_id')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+
+                                                            <select
+                                                                class="form-control form-control-solid form-control-lg"
+                                                                name="role_id" id="role_id" type="text">
+
+                                                                <option value="">
+                                                                    {{trans('general.select_from_list')}}
+                                                                </option>
+
+                                                                @if($roles && $roles->count()>0)
+                                                                    @foreach($roles as $role)
+                                                                        <option value="{!! $role->id !!}">
+                                                                            {!! $role->name !!}
+                                                                        </option>
+                                                                    @endforeach
+                                                                @endif
+
+                                                            </select>
+                                                            <span class="form-text text-danger"
+                                                                  id="role_id_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
                                                             {{trans('users.mobile')}}
                                                         </label>
                                                         <div class="col-lg-9 col-xl-9">
@@ -249,6 +279,7 @@
             $('#photo_error').text('');
             $('#mobile_error').text('');
             $('#gender_error').text('');
+            $('#role_id_error').text('');
 
             $('#name').css('border-color', '');
             $('#email').css('border-color', '');
@@ -256,6 +287,8 @@
             $('#photo').css('border-color', '');
             $('#mobile').css('border-color', '');
             $('#gender').css('border-color', '');
+            $('#role_id').css('border-color', '');
+
             ////////////////////////////////////////////////////
 
             var data = new FormData(this);
@@ -288,7 +321,7 @@
                             text: "",
                             icon: "success",
                             allowOutsideClick: false,
-                            customClass: { confirmButton: 'add_user_button' }
+                            customClass: {confirmButton: 'add_user_button'}
                         });
                         $('.add_user_button').click(function () {
                             window.location.href = "{{route('users')}}";
@@ -309,7 +342,6 @@
                 },
             })
         })
-
 
 
     </script>

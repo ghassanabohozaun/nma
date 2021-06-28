@@ -10,7 +10,7 @@
                 </button>
             </div>
 
-            <form action="{{route('admin.about.site.brochure.store')}}" method="POST" enctype="multipart/form-data"
+            <form action="" method="POST" enctype="multipart/form-data"
                   id="form_brochure_store">
                 @csrf
                 <div class="modal-body">

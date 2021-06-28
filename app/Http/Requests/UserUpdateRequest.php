@@ -22,6 +22,7 @@ class UserUpdateRequest extends FormRequest
             'name' => 'required',
             'password' => 'sometimes|nullable|min:6',
             'gender' => 'required|in:male,female',
+            'role_id' => 'required',
             'photo' => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }

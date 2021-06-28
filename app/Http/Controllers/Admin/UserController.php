@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UsersTrashedResource;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Models\Admin;
@@ -39,7 +40,7 @@ class UserController extends Controller
             $offset = $request->start;
         }
 
-        $list = Admin::withoutTrashed()->orderByDesc('created_at')->offset($offset)->take($perPage)->get();
+        $list = Admin::with('role')->withoutTrashed()->orderByDesc('created_at')->offset($offset)->take($perPage)->get();
         $arr = UsersResource::collection($list);
         $recordsTotal = Admin::get()->count();
         $recordsFiltered = Admin::get()->count();
@@ -90,7 +91,8 @@ class UserController extends Controller
     public function create()
     {
         $title = trans('menu.add_new_user');
-        return view('admin.users.create', compact('title'));
+        $roles = Role::get();
+        return view('admin.users.create', compact('title', 'roles'));
     }
     /////////////////////////////////////////
     /// User store
@@ -107,6 +109,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'role_id' => $request->role_id,
             'photo' => $photo_path,
             'mobile' => $request->mobile,
             'gender' => $request->gender,
@@ -129,9 +132,10 @@ class UserController extends Controller
         if (!$user) {
             return redirect()->route('admin.not.found');
         }
+        $roles = Role::get();
         $title = trans('users.update_users');
 
-        return view('admin.users.update', compact('title', 'user'));
+        return view('admin.users.update', compact('title', 'user','roles'));
     }
 
 
@@ -167,6 +171,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'password' => $password,
+            'role_id' => $request->role_id,
             'photo' => $photo_path,
             'mobile' => $request->mobile,
             'gender' => $request->gender,
