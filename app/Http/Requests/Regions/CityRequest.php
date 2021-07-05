@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Regions;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequest extends FormRequest
+class CityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +24,18 @@ class RoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_name_ar' => 'required',
-            'role_name_en' => 'required',
-            'permissions' => 'required|array|min:1',
+            'city_name_ar' => 'required',
+            'city_name_en' => 'required',
+            'governorate_id' => 'required|numeric',
         ];
     }
 
     public function messages()
     {
         return [
-            'role_name_ar.required' => trans('roles.role_name_ar_required'),
-            'role_name_en.required' => trans('roles.role_name_en_required'),
-            'permissions.required' => trans('roles.permission_required'),
-            'min' => trans('roles.min')
+            'city_name_ar.required' => trans('regions.city_name_ar_required'),
+            'city_name_en.required' => trans('regions.city_name_en_required'),
+            'governorate_id.required' => trans('regions.governorate_id_required'),
         ];
     }
 }

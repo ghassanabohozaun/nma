@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWhyChooseUsTable extends Migration
+class CreateNeighborhoodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateWhyChooseUsTable extends Migration
      */
     public function up()
     {
-        Schema::create('why_choose_us', function (Blueprint $table) {
+        Schema::create('neighborhoods', function (Blueprint $table) {
             $table->id();
-            $table->string('title_ar');
-            $table->string('title_en');
-            $table->longText('details_ar');
-            $table->longText('details_en');
-            $table->string('photo')->nullable();
+            $table->string('neighborhood_name_ar');
+            $table->string('neighborhood_name_en');
+            $table->integer('city_id')->unsigned()->nullable();
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateWhyChooseUsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('why_choose_us');
+        Schema::dropIfExists('neighborhoods');
     }
 }

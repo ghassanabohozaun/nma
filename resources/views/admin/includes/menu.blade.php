@@ -32,7 +32,8 @@
         <!------------------------------------ home     ---------------------------------------------------->
             <li class="menu-item  menu-item-submenu
                         @if(str_contains(url()->current(), 'settings')
-                            || str_contains(url()->current(), '/admin/admin')) menu-item-open @endif"
+                            || str_contains(url()->current(), '/admin/admin')
+                            || str_contains(url()->current(), '/admin/regions')) menu-item-open @endif"
                 aria-haspopup="true" data-menu-toggle="hover"
                 style="margin-top: -25px">
                 <a href="javascript:;" class="menu-link menu-toggle">
@@ -65,27 +66,33 @@
                             </li>
                         @endcan
 
+                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="{!! route('admin.regions') !!}" class="menu-link menu-toggle">
+                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                <span class="menu-text">{{trans('menu.regions')}}</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
-                <!------------------------------------ Roles  ---------------------------------------------------->
-                @can('roles')
-                    <li class="menu-item  menu-item-submenu"
-                        aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="{!! route('admin.roles') !!}" class="menu-link menu-toggle">
+            <!------------------------------------ Roles  ---------------------------------------------------->
+            @can('roles')
+                <li class="menu-item  menu-item-submenu"
+                    aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="{!! route('admin.roles') !!}" class="menu-link menu-toggle">
                     <span class="svg-icon menu-icon">
                         <i class="fa fa-user-lock"></i>
                     </span>
-                            <span class="menu-text">{{trans('menu.permissions')}}</span>
-                            <span class="menu-label">
+                        <span class="menu-text">{{trans('menu.permissions')}}</span>
+                        <span class="menu-label">
                         <span class="label label-rounded label-success">
                              {{App\Models\Role::count()}}
                         </span>
                     </span>
-                        </a>
-                    </li>
-                @endcan
-            <!------------------------------------ Users    ---------------------------------------------------->
+                    </a>
+                </li>
+            @endcan
+        <!------------------------------------ Users    ---------------------------------------------------->
             @can('users')
                 <li class="menu-item  menu-item-submenu
                  @if(str_contains(url()->current(), '/users')) menu-item-open @endif"
@@ -136,9 +143,8 @@
                         </ul>
                     </div>
                 </li>
-            @endcan
-            <!------------------------------------ Users    ---------------------------------------------------->
-
+        @endcan
+        <!------------------------------------ Users    ---------------------------------------------------->
 
 
         </ul>

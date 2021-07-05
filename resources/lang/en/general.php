@@ -61,9 +61,12 @@ return [
     'internal_server_error_message' => 'Sorry, Internal server Error ',
     'try_catch_error_message' => 'Sorry, There is an error, please try again later',
     'error_message' => 'Sorry, There is an error',
+    'cancelled_message' => 'Sorry, You  canceled the order',
+    'error' => 'Error',
+
 
     'ask_delete_record' => 'Do You Want To Delete This Record ? ',
-    'ask_permanent_delete_record'=> 'Do You Want To Permanent Delete This Record ? ',
+    'ask_permanent_delete_record' => 'Do You Want To Permanent Delete This Record ? ',
 
     'change_status_success_message' => 'change Status Successfully',
     'export' => 'Export',

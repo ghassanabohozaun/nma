@@ -70,12 +70,12 @@
                                                 <div class="my-5">
 
                                                     <!--begin::Group-->
-                                                    <div class="form-group row">
+                                                    <div class="d-none form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label"></label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <input
                                                                 class="form-control form-control-solid form-control-lg"
-                                                                name="id" id="id" type="text" value="{{ $role->id }}"
+                                                                name="id" id="id" type="hidden" value="{{ $role->id }}"
                                                             /></div>
                                                     </div>
                                                     <!--end::Group-->
@@ -84,16 +84,33 @@
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">
-                                                            {{trans('roles.name')}}
+                                                            {{trans('roles.role_name_ar')}}
                                                         </label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <input
                                                                 class="form-control form-control-solid form-control-lg"
-                                                                name="name" id="name" type="text"
-                                                                value="{{ $role->name }}"
-                                                                placeholder=" {{trans('roles.enter_name')}}"
+                                                                name="role_name_ar" id="role_name_ar" type="text"
+                                                                value="{{ $role->role_name_ar }}"
+                                                                placeholder=" {{trans('roles.enter_role_name_ar')}}"
                                                                 autocomplete="off"/>
-                                                            <span class="form-text text-danger" id="name_error"></span>
+                                                            <span class="form-text text-danger" id="role_name_ar_error"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                                            {{trans('roles.role_name_en')}}
+                                                        </label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input
+                                                                class="form-control form-control-solid form-control-lg"
+                                                                name="role_name_en" id="role_name_en" type="text"
+                                                                value="{{ $role->role_name_en }}"
+                                                                placeholder=" {{trans('roles.enter_role_name_en')}}"
+                                                                autocomplete="off"/>
+                                                            <span class="form-text text-danger" id="role_name_en_error"></span>
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->
@@ -104,7 +121,7 @@
                                                             class="col-3 col-form-label">{{trans('roles.permissions') }}</label>
                                                         <div class="col-9 col-form-label">
                                                             @foreach(config('global.permissions') as $name=>$value)
-                                                                <div class="checkbox-inline">
+                                                                <div class="checkbox-inline" style="margin-top: 5px">
                                                                     <label class="checkbox checkbox-primary">
                                                                         <input type="checkbox" name="permissions[]"
                                                                                id="permissions[]" value="{{$name}}"
@@ -114,10 +131,9 @@
                                                                     </label>
                                                                 </div>
                                                             @endforeach
+                                                                <br/>
+                                                                <span class="form-text text-danger" id="permissions_error"></span>
                                                         </div>
-                                                        <span class="form-text text-danger"
-                                                              id="permissions_error"></span>
-
                                                     </div>
 
                                                 </div>
@@ -152,10 +168,12 @@
             e.preventDefault();
             $.notifyClose();
             ///////////////////////////////////////////////////////////////////////////
-            $('#name_error').text('');
+            $('#role_name_ar_error').text('');
+            $('#role_name_en_error').text('');
             $('#permissions_error').text('');
 
-            $('#name').css('border-color', '');
+            $('#role_name_ar').css('border-color', '');
+            $('#role_name_en').css('border-color', '');
             ///////////////////////////////////////////////////////////////////////////
 
             var data = new FormData(this);
@@ -185,10 +203,16 @@
                     console.log(data);
 
                     if (data.status == true) {
-                        notifySuccessOrError(data.msg, 'success');
-                        setTimeout(function () {
-                            window.location.href = "{!! route('admin.roles') !!}";
-                        }, 2500)
+                        Swal.fire({
+                            title: data.msg,
+                            text: "",
+                            icon: "success",
+                            allowOutsideClick: false,
+                            customClass: {confirmButton: 'update_role_button'}
+                        });
+                        $('.update_role_button').click(function () {
+                            window.location.href = "{{route('admin.roles')}}";
+                        });
                     }
 
 

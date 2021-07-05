@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWhoAreWesTable extends Migration
+class CreateGovernoratesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateWhoAreWesTable extends Migration
      */
     public function up()
     {
-        Schema::create('who_are_we', function (Blueprint $table) {
+        Schema::create('governorates', function (Blueprint $table) {
             $table->id();
-            $table->longText('who_are_we_ar');
-            $table->longText('who_are_we_en');
-            $table->string('brochure')->nullable();
+            $table->string('governorate_name_ar');
+            $table->string('governorate_name_en');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateWhoAreWesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('who_are_wes');
+        Schema::dropIfExists('governorates');
     }
 }

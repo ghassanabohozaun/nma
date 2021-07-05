@@ -21,7 +21,7 @@ return [
     'welcome_message_details' => 'We welcome you to the site control panel, this panel provides you with complete control over the site in terms of managing publications, Treatment Areas , photo and video albums, videos, slides, and many other possibilities',
     'profile' => 'Profile',
     'sign_out' => 'Sign Out',
-    'copy_rights' => 'gbclinic',
+    'copy_rights' => 'NMA',
 
     /////////////////////////////////
     /// Upload Center

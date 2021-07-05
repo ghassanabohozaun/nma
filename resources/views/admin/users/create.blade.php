@@ -181,7 +181,11 @@
                                                                 @if($roles && $roles->count()>0)
                                                                     @foreach($roles as $role)
                                                                         <option value="{!! $role->id !!}">
-                                                                            {!! $role->name !!}
+                                                                            @if(Lang()=='ar')
+                                                                                {!! $role->role_name_ar !!}
+                                                                            @else
+                                                                                {!! $role->role_name_en !!}
+                                                                            @endif
                                                                         </option>
                                                                     @endforeach
                                                                 @endif

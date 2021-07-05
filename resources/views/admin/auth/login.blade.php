@@ -29,7 +29,7 @@
                         <div class="brand-wrapper">
                             @if(!empty(setting()->site_logo))
                                 <a href="#" class="brand-logo" style="margin-top: 10px">
-                                    <img src="{{asset(Storage::url(setting()->site_logo))}}" width="110" height="110">
+                                    <img src="{{asset(Storage::url(setting()->site_logo))}}" width="100" height="90">
                                 </a>
                             @else
                                 <img src="{!! asset('adminBoard/adminLogin/assets/images/logo.svg') !!}" alt="logo"

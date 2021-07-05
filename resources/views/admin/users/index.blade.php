@@ -174,7 +174,7 @@
                 } else if (result.dismiss === "cancel") {
                     Swal.fire({
                         title: "{!! trans('general.cancelled') !!}",
-                        text: "{!! trans('general.error_message') !!}",
+                        text: "{!! trans('general.cancelled_message') !!}",
                         icon: "error",
                         allowOutsideClick: false,
                         customClass: {confirmButton: 'cancel_delete_user_button'}
@@ -182,19 +182,6 @@
                 }
             });
 
-            /* $.notifyClose();
-             var id = $(this).data('id');
-             $('#user_delete_id').val(id);
-
-             $.notifyClose();
-             notify_message = " <i class='fa fa-trash' style='color:white'></i> &nbsp; <br /><br />" +
-                "<button type='button' id='btn_user_delete'  class=' btn btn-outline-light btn-sm m-btn m-btn--air m-btn--wide '" +
-                ">{{trans('general.yes')}}</button> &nbsp;" +
-                "<button type='button' id='btn_user_close' class=' btn btn-outline-light btn-sm m-btn m-btn--air m-btn--wide '" +
-                ">{{trans('general.no')}}</button>"
-
-            notifyDelete(notify_message, 'danger')
-*/
         })
 
         ///////////////////////////////////////////////////

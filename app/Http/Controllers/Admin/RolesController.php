@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use App\Http\Resources\OfferResource;
 use App\Http\Resources\RoleResource;
+use App\Models\Admin;
 use App\Models\Offer;
 use App\Models\Role;
 use App\Traits\GeneralTrait;
@@ -62,8 +63,15 @@ class RolesController extends Controller
                 if (!$role) {
                     return redirect()->route('admin.not.found');
                 }
-                $role->delete();
-                return $this->returnSuccessMessage(trans('general.delete_success_message'));
+
+                $admins = Admin::where('role_id', $request->id)->get();
+                if ($admins->isEmpty()) {
+                    $role->delete();
+                    return $this->returnSuccessMessage(trans('general.delete_success_message'));
+                } else {
+                    return $this->returnError(trans('roles.delete_error_message'),500);
+                }
+
             }
         } catch (\Exception $exception) {
             return $this->returnError(trans('general.try_catch_error_message'), 500);
@@ -86,7 +94,8 @@ class RolesController extends Controller
         try {
             $permissions = json_encode($request->permissions);
             Role::create([
-                'name' => $request->name,
+                'role_name_ar' => $request->role_name_ar,
+                'role_name_en' => $request->role_name_en,
                 'permissions' => $permissions,
             ]);
             return $this->returnSuccessMessage(trans('general.add_success_message'));
@@ -123,7 +132,8 @@ class RolesController extends Controller
             }
             $permissions = json_encode($request->permissions);
             $role->update([
-                'name' => $request->name,
+                'role_name_ar' => $request->role_name_ar,
+                'role_name_en' => $request->role_name_en,
                 'permissions' => $permissions,
             ]);
             return $this->returnSuccessMessage(trans('general.update_success_message'));

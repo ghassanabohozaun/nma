@@ -65,6 +65,37 @@ Route::group([
         Route::get('/edit/{id?}', 'RolesController@edit')->name('admin.role.edit');
         Route::post('/update', 'RolesController@update')->name('admin.role.update');
     });
+    ///////////////////////////////////////////////////////////////////
+    /// Regions Routes
+
+    Route::group(['prefix' => 'regions'], function () {
+        Route::get('/', 'RegionsController@index')->name('admin.regions');
+    });
+
+    Route::group(['prefix' => 'governorate'], function () {
+        Route::post('/store-governorate', 'RegionsController@storeGovernorate')->name('governorate.store');
+        Route::get('/get-all-governorates', 'RegionsController@getAllGovernorates')->name('get.all.governorates');
+        Route::post('/destroy-governorate', 'RegionsController@destroyGovernorate')->name('governorate.destroy');
+        Route::get('/edit-governorate', 'RegionsController@editGovernorate')->name('governorate.edit');
+        Route::post('/update-governorate', 'RegionsController@updateGovernorate')->name('governorate.update');
+
+    });
+
+    Route::group(['prefix' => 'city'], function () {
+        Route::post('/store-city', 'RegionsController@storeCity')->name('city.store');
+        Route::get('/get-all-cities', 'RegionsController@getAllCities')->name('get.all.cities');
+        Route::post('/destroy-city', 'RegionsController@destroyCity')->name('city.destroy');
+        Route::get('/edit-city', 'RegionsController@editCity')->name('city.edit');
+        Route::post('/update-city', 'RegionsController@updateCity')->name('city.update');
+    });
+
+    Route::group(['prefix' => 'neighborhood'], function () {
+        Route::post('/store-neighborhood', 'RegionsController@storeNeighborhood')->name('neighborhood.store');
+        Route::post('/destroy-neighborhood', 'RegionsController@destroyNeighborhood')->name('neighborhood.destroy');
+        Route::get('/edit-neighborhood', 'RegionsController@editNeighborhood')->name('neighborhood.edit');
+        Route::post('/update-neighborhood', 'RegionsController@updateNeighborhood')->name('neighborhood.update');
+    });
+
 
     ///////////////////////////////////////////////////////////////////
     /// Upload Center routes

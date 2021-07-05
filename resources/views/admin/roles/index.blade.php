@@ -64,7 +64,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>@lang('roles.name')</th>
+                                                    <th>@lang('roles.role_name_ar')</th>
+                                                    <th>@lang('roles.role_name_en')</th>
                                                     <th>@lang('roles.permissions')</th>
                                                     <th>@lang('general.actions')</th>
                                                 </tr>
@@ -109,8 +110,12 @@
 
     <script>
         window.data_url = "{{route('get.admin.roles')}}";
-        window.columns = [{data: "id"}, {data: "name"},
-            {data: "permissions"}, {data: "actions"},];
+        window.columns = [{data: "id"},
+            {data: "role_name_ar"},
+            {data: "role_name_en"},
+            {data: "permissions"},
+            {data: "actions"},
+        ];
     </script>
 
     <script type="text/javascript">
@@ -118,67 +123,68 @@
 
         ///////////////////////////////////////////////////////////////////////
         // Show delete role notify
-        $(document).on('click', '.role_offer_btn', function (e) {
+        $(document).on('click', '.role_delete_btn', function (e) {
             e.preventDefault();
-            $.notifyClose();
-
             var id = $(this).data('id');
-            $('#role_delete_id').val(id);
 
-            $.notifyClose();
-            notify_message = " <i class='fa fa-trash' style='color:white'></i> &nbsp; {{trans('general.ask_delete_record')}}<br /><br />" +
-                "<button type='button' id='btn_role_delete'  class=' btn btn-outline-light btn-sm m-btn m-btn--air m-btn--wide '" +
-                ">{{trans('general.yes')}}</button> &nbsp;" +
-                "<button type='button' id='btn_role_close' class=' btn btn-outline-light btn-sm m-btn m-btn--air m-btn--wide '" +
-                ">{{trans('general.no')}}</button>"
+            Swal.fire({
+                title: "{{trans('general.ask_delete_record')}}",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "{{trans('general.yes')}}",
+                cancelButtonText: "{{trans('general.no')}}",
+                reverseButtons: false,
+                allowOutsideClick: false,
+            }).then(function (result) {
+                if (result.value) {
+                    //////////////////////////////////////
+                    // Delete role
+                    $.ajax({
+                        url: '{!! route('admin.role.destroy') !!}',
+                        data: {id, id},
+                        type: 'post',
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            if (data.status == true) {
+                                Swal.fire({
+                                    title: "{!! trans('general.deleted') !!}",
+                                    text: "{!! trans('general.delete_success_message') !!}",
+                                    icon: "success",
+                                    allowOutsideClick: false,
+                                    customClass: {confirmButton: 'delete_role_button'}
+                                });
+                                $('.delete_role_button').click(function () {
+                                    updateDataTable();
+                                });
+                            }
 
-            notifyDelete(notify_message, 'danger')
+                            if (data.status == false) {
+                                Swal.fire({
+                                    title: "{!! trans('general.cancelled') !!}",
+                                    text: data.msg,
+                                    icon: "warning",
+                                    allowOutsideClick: false,
+                                });
 
-        });
-
-        ///////////////////////////////////////////////
-        // close  delete role notify
-        $('body').on('click', '#btn_role_close', function (e) {
-            e.preventDefault();
-            $.notifyClose();
-            $('#role_delete_id').val('');
-
-        })
-        ///////////////////////////////////////////////
-        // delete role
-        $('body').on('click', '#btn_role_delete', function (e) {
-            e.preventDefault();
-            $.notifyClose();
-            var id = $('#role_delete_id').val();
-
-            $.ajax({
-                url: "{!! route('admin.role.destroy') !!}",
-                data: {id, id},
-                dataType: 'json',
-                type: 'POST',
-                beforeSend: function () {
-                    KTApp.blockPage({
-                        overlayColor: '#000000',
-                        state: 'danger',
-                        message: "{{trans('general.please_wait')}}",
+                            }
+                        },//end success
                     });
-                    setTimeout(function () {
-                        KTApp.unblockPage();
-                    }, 1500);
-                },
-                success: function (data) {
-                    console.log(data);
-                    if (data.status == true) {
-                        $('#role_delete_id').val('');
-                        notifySuccessOrError(data.msg, 'success');
-                        updateDataTable();
-                    }
-                },
-                complete: function () {
-                    KTApp.unblockPage();
-                },
-            })
+
+                } else if (result.dismiss === "cancel") {
+                    Swal.fire({
+                        title: "{!! trans('general.cancelled') !!}",
+                        text: "{!! trans('general.cancelled_message') !!}",
+                        icon: "error",
+                        allowOutsideClick: false,
+                        customClass: {confirmButton: 'cancel_delete_role_button'}
+                    })
+                }
+            });
+
+
         });
+
 
 
 

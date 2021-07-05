@@ -203,7 +203,11 @@
                                                                         <option
                                                                             value="{!! $role->id !!}"
                                                                             {{$user->role_id ==old('role_id', $role->id) ?'selected':''}}>
-                                                                            {!! $role->name !!}
+                                                                            @if(Lang()=='ar')
+                                                                                {!! $role->role_name_ar !!}
+                                                                            @else
+                                                                                {!! $role->role_name_en !!}
+                                                                            @endif
                                                                         </option>
                                                                     @endforeach
                                                                 @endif

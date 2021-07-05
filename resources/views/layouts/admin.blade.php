@@ -121,7 +121,8 @@
                 <!--begin::Logo-->
                 @if(!empty(setting()->site_logo))
                     <a href="#" class="brand-logo">
-                        <img src="{{asset(Storage::url(setting()->site_logo))}}" style="border-radius: 10%;width: 80px; height: 60px" >
+                        <img src="{{asset(Storage::url(setting()->site_logo))}}"
+                             style="border-radius: 10%;width: 80px; height: 60px">
                     </a>
                 @else
                     LOGO
@@ -197,18 +198,20 @@
         <!--begin::Header-->
         <div class="d-flex align-items-center mt-5">
             <div class="symbol symbol-100 mr-5">
-                <div class="symbol-label"
-                     @if(empty(admin()->user()->photo))
-                     style=" background-image: url('{{asset('adminBoard/images/user.jpg')}}');"
-                     @else
-                     style=" background-image: url({{asset(\Illuminate\Support\Facades\Storage::url(admin()->user()->photo))}});"
-                    @endif
+                <a href="{{{route('get.admin')}}}">
+                    <div class="symbol-label"
+                         @if(empty(admin()->user()->photo))
+                         style=" background-image: url('{{asset('adminBoard/images/user.jpg')}}');"
+                         @else
+                         style=" background-image: url({{asset(\Illuminate\Support\Facades\Storage::url(admin()->user()->photo))}});"
+                        @endif></div>
+                </a>
 
-                ></div>
                 <i class="symbol-badge bg-success"></i>
             </div>
             <div class="d-flex flex-column">
-                <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
+                <a href="{!! route('get.admin')!!}"
+                   class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
                     {{admin()->user()->name}}
                 </a>
                 <div class="text-muted mt-1">
@@ -402,6 +405,8 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+
     ////////////////////////////////////////////////////////////////////////////
     //////// notifySuccessOrError
     function notifySuccessOrError(notify_message, notify_type) {
