@@ -98,6 +98,20 @@ Route::group([
 
 
     ///////////////////////////////////////////////////////////////////
+    /// Aides Routes
+    Route::group(['prefix' => 'aides', 'namespace' => 'Aides'], function () {
+        ///////////////////////////////////////////////////////////////////
+        /// beneficiaries Routes
+        Route::group(['prefix' => 'beneficiaries'], function () {
+            Route::get('/', 'BeneficiariesController@index')->name('aides.beneficiaries');
+            Route::get('/get-beneficiaries', 'BeneficiariesController@getBeneficiaries')->name('get.aides.beneficiaries');
+            Route::get('/create', 'BeneficiariesController@create')->name('aides.beneficiary.create');
+        });
+
+    });
+
+
+    ///////////////////////////////////////////////////////////////////
     /// Upload Center routes
     Route::group(['prefix' => 'upload-center'], function () {
         Route::get('/', 'UploadCenterController@index')->name('admin.upload.center');

@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
     <!--end::Fonts-->
 
+
+    <!--begin::Page Custom Styles(used by this page)-->
+    <link href="{{asset('adminBoard/assets/css/pages/wizard/wizard-4.css')}}" rel="stylesheet" type="text/css"/>
+    <!--end::Page Custom Styles-->
+
     <!--begin::Page Vendors Styles(used by this page)-->
     <link href="{{asset('adminBoard/assets/plugins/custom/jstree/jstree.bundle.css')}}" rel="stylesheet"
           type="text/css"/>
@@ -388,7 +393,6 @@
 <script src="{{asset('adminBoard/assets/js/pages/crud/forms/editors/summernote.js')}}"></script>
 <script src="{{asset('adminBoard/assets/js/bootstrap-datepicker.ar.min.js')}}"></script>
 <script src="{{asset('adminBoard/assets/js/pages/crud/forms/widgets/bootstrap-datepicker.js')}}"></script>
-
 <script src="{{asset('adminBoard/assets/js/pages/features/miscellaneous/sweetalert2.js')}}"></script>
 
 <!--end::Page Scripts-->
@@ -405,7 +409,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
 
     ////////////////////////////////////////////////////////////////////////////
     //////// notifySuccessOrError
@@ -474,7 +477,6 @@
         });
     }
 
-
     ///////////////////////////////////////////////////////////////////////////
     //////// Translate Datatable
     window.lang = {
@@ -493,7 +495,6 @@
             last: "@lang('general.last')"
         }
     }
-
 
 </script>
 

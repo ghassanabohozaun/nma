@@ -15,6 +15,9 @@ return [
     'permissions'=>'الصلاحيات',
     'add_new_permission'=>'إضافة صلاحية جديدة',
     'regions' => 'المناطق',
+    'aides' => 'المساعدات الانسانية',
+    'beneficiaries'=>'المستفيدين',
+    'add_new_beneficiary'=>'اضافة مستفيد جديد',
 
 
 ];

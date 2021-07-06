@@ -145,7 +145,43 @@
                 </li>
         @endcan
         <!------------------------------------ Users    ---------------------------------------------------->
+            <!------------------------------------ Users    ---------------------------------------------------->
+            <li class="menu-item  menu-item-submenu
+                 @if(str_contains(url()->current(), '/aides')) menu-item-open @endif"
+                aria-haspopup="true" data-menu-toggle="hover">
+                <a href="javascript:;" class="menu-link menu-toggle">
+                    <span class="svg-icon menu-icon">
+                        <i class="fa fa-cubes"></i>
+                    </span>
+                    <span class="menu-text">{{trans('menu.aides')}}</span>
+                    <i class="menu-arrow"></i>
+                    <span class="menu-label">
+                    </span>
 
+                </a>
+                <div class="menu-submenu ">
+                    <i class="menu-arrow"></i>
+                    <ul class="menu-subnav">
+                        <li class="menu-item  menu-item-parent" aria-haspopup="true">
+                            <span class="menu-link">
+                                <span class="menu-text">{{trans('menu.beneficiaries')}}</span>
+                            </span>
+                        </li>
+                        <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="{{route('aides.beneficiaries')}}" class="menu-link menu-toggle">
+                                <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                <span class="menu-text">{{trans('menu.beneficiaries')}}</span>
+                                <span class="menu-label">
+                                    <span class="label label-rounded label-info">
+                                        {!! \App\Models\Aides\Beneficiary::count() !!}
+                                    </span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <!------------------------------------ Users    ---------------------------------------------------->
 
         </ul>
         <!--end::Menu Nav-->
