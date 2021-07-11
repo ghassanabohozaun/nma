@@ -75,8 +75,6 @@ class AdminsController extends Controller
 
 
 
-
-
             return $this->returnSuccessMessage(trans('general.update_success_message'));
         } catch (\Exception $exception) {
             return $this->returnError(trans('general.try_catch_error_message'), '500');

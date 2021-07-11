@@ -18,4 +18,24 @@ class Beneficiary extends Model
     ];
     protected $hidden = ['created_at', 'updated_at'];
 
+    ////////////////////////////// Relations//////////////////////////////////////
+    /// With Address
+    public function beneficiaryAddress()
+    {
+        return $this->hasOne(Beneficiary_Address::class, 'beneficiary_id');
+    }
+
+    /// With Family
+    public function beneficiaryFamily()
+    {
+        return $this->hasOne(Beneficiary_Family::class, 'beneficiary_id');
+    }
+
+    /// With Job
+    public function beneficiaryJob()
+    {
+        return $this->hasOne(Beneficiary_Job::class, 'beneficiary_id');
+    }
+
+
 }

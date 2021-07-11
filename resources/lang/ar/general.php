@@ -53,6 +53,7 @@ return [
     'deleted_at' => 'حالة الحذف',
     'force_delete' => 'حذف نهائي',
     'restore' => 'استرجاع',
+    'submit' => 'إرسال',
 
     'change_image' => 'تغير الصورة',
     'image_format_allow' => 'صيغ الصور المسموح بها هي jpg ,jpeg, png فقط',
@@ -88,4 +89,17 @@ return [
     'loadingRecords' => 'جار جلب البيانات...',
     'comments' => 'التعليقات',
     'captcha' => 'الرجاء التاكد من كلمة التحقق ',
+
+
+    'validation_error_message'=>' عذرا ,  يبدو انه تم اكتشاف بعد الاخطاء  , الرجاء المحاولة مرة اخري.',
+    'ok_got_it' => 'حسناً, فهمتك! ',
+    'required' => 'هذا الحقل مطلوب',
+    'image_max' => 'حجم الصورة المسموح به 2 ميجا فقط',
+    'in' => 'القيمية المدخلة غير صحيحة',
+    'digits' => 'القيمية المدخلة يجب ان تكون أرقام',
+    'personal_id_validation'=>'رقم الهوية يتكون من 9 ارقام',
+    'mobile_number_validation'=>'رقم الموبايل يتكون من 10 ارقام',
+    'choose_validation'=>'يجب عليك اختبار احد الخيارات',
+    'review_your_details_and_submit'=>'قم بمراجعة البيانات ثم ارسلها',
+
 ];

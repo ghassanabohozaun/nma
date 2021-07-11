@@ -117,6 +117,14 @@ class RegionsController extends Controller
         return response()->json($cities);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    /// get City By Governorate ID
+    public function getCityByGovernorateID(Request $request)
+    {
+        $cities = City::where('governorate_id', '=', $request->id)->get();
+        return response()->json($cities);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     /// edit City
     public function editCity(Request $request)
     {
@@ -182,6 +190,15 @@ class RegionsController extends Controller
         }
 
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    /// get Neighborhood By City ID
+    public function getNeighborhoodByCityID(Request $request)
+    {
+        $neighborhoods = Neighborhood::where('city_id', '=', $request->id)->get();
+        return response()->json($neighborhoods);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     /// update Neighborhood
     public function updateNeighborhood(NeighborhoodRequest $request)

@@ -22,7 +22,7 @@ class CreateBeneficiaryAddressesTable extends Migration
             $table->integer('neighborhood');
             $table->text('address_details')->nullable();
             $table->string('mobile');
-            $table->string('mobile_tow');
+            $table->string('mobile_tow')->nullable();
             $table->timestamps();
         });
     }

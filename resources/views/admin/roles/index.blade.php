@@ -122,7 +122,7 @@
 
 
         ///////////////////////////////////////////////////////////////////////
-        // Show delete role notify
+        //  delete role notify
         $(document).on('click', '.role_delete_btn', function (e) {
             e.preventDefault();
             var id = $(this).data('id');

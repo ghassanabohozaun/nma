@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Aides\Beneficiary_Address;
 use Illuminate\Database\Eloquent\Model;
 
 class Neighborhood extends Model
@@ -17,5 +18,11 @@ class Neighborhood extends Model
     ////// city
     public function city(){
         return $this->belongsTo(City::class,'city_id','id');
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    ////// beneficiary Address
+    public function beneficiaryAddress(){
+        return $this->hasOne(Beneficiary_Address::class,'neighborhood');
     }
 }

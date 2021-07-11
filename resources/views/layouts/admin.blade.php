@@ -375,6 +375,9 @@
 <script src="{{asset('adminBoard/assets/js/scripts.bundle.js')}}"></script>
 <!--end::Global Theme Bundle-->
 
+<script src="{{asset('adminBoard/assets/js/my_general_script.js')}}"></script>
+
+
 <!--begin::Page Vendors(used by this page)-->
 <script src="{{asset('adminBoard/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>
 
@@ -409,6 +412,8 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+
 
     ////////////////////////////////////////////////////////////////////////////
     //////// notifySuccessOrError
@@ -476,6 +481,16 @@
             },
         });
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //////// Translate validation
+    var required_validation = "{{ __('general.required') }}";
+    var in_validation = "{{ __('general.in') }}";
+    var digits_validation = "{{ __('general.digits') }}";
+    var personal_id_validation = "{{ __('general.personal_id_validation') }}";
+    var mobile_number_validation = "{{ __('general.mobile_number_validation') }}";
+    var choose_validation = "{{ __('general.choose_validation') }}";
+
 
     ///////////////////////////////////////////////////////////////////////////
     //////// Translate Datatable

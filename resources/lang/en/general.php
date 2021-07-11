@@ -49,7 +49,7 @@ return [
     'deleted_at' => 'Deleted Status',
     'force_delete' => 'Force Delete',
     'restore' => 'Restore',
-
+    'submit' => 'Submit',
     'change_image' => 'Change image',
     'image_format_allow' => 'Allowed file types jpg,jpeg,png',
     'add_success_message' => ' Added Successfully',
@@ -92,5 +92,16 @@ return [
     'loadingRecords' => 'loading Records ...',
     'comments' => 'Comments',
     'captcha' => 'Please Check Captcha ',
+
+    'validation_error_message' => 'Sorry, looks like there are some errors detected, please try again.',
+    'ok_got_it' => 'Ok, got it! ',
+    'required' => 'This Field is Required ',
+    'image_max' => 'Max allow image size 2 mega',
+    'in' => 'The entered value incorrect',
+    'digits' => 'The entered value must be digits',
+    'personal_id_validation' => 'Personal ID consist of 9 digits',
+    'mobile_number_validation' => 'Mobile consist of 10 digits',
+    'choose_validation' => 'You Must chose one of options',
+    'review_your_details_and_submit'=>'Review your Details and Submit',
 
 ];

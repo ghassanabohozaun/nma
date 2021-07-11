@@ -87,6 +87,8 @@ Route::group([
         Route::post('/destroy-city', 'RegionsController@destroyCity')->name('city.destroy');
         Route::get('/edit-city', 'RegionsController@editCity')->name('city.edit');
         Route::post('/update-city', 'RegionsController@updateCity')->name('city.update');
+        Route::get('/get-city-by-governorate-id', 'RegionsController@getCityByGovernorateID')
+            ->name('get.city.by.governorate.id');
     });
 
     Route::group(['prefix' => 'neighborhood'], function () {
@@ -94,6 +96,9 @@ Route::group([
         Route::post('/destroy-neighborhood', 'RegionsController@destroyNeighborhood')->name('neighborhood.destroy');
         Route::get('/edit-neighborhood', 'RegionsController@editNeighborhood')->name('neighborhood.edit');
         Route::post('/update-neighborhood', 'RegionsController@updateNeighborhood')->name('neighborhood.update');
+        Route::get('/get-neighborhood-by-city-id', 'RegionsController@getNeighborhoodByCityID')
+            ->name('get.neighborhood.by.city.id');
+
     });
 
 
@@ -106,6 +111,11 @@ Route::group([
             Route::get('/', 'BeneficiariesController@index')->name('aides.beneficiaries');
             Route::get('/get-beneficiaries', 'BeneficiariesController@getBeneficiaries')->name('get.aides.beneficiaries');
             Route::get('/create', 'BeneficiariesController@create')->name('aides.beneficiary.create');
+            Route::post('/store', 'BeneficiariesController@store')->name('aides.beneficiary.store');
+            Route::post('/destroy', 'BeneficiariesController@destroy')->name('aides.beneficiary.destroy');
+            Route::get('/edit/{id?}', 'BeneficiariesController@edit')->name('aides.beneficiary.edit');
+            Route::post('/update', 'BeneficiariesController@update')->name('aides.beneficiary.update');
+
         });
 
     });
@@ -122,8 +132,6 @@ Route::group([
         Route::get('/get-file-by-id', 'UploadCenterController@getUploadCenterFileById')
             ->name('get.admin.upload.center.file.by.id');
     });
-
-
 });
 
 
