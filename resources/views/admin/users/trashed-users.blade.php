@@ -182,7 +182,15 @@
                 data: {id, id},
                 type: 'post',
                 dataType: 'JSON',
+                beforeSend: function () {
+                    KTApp.blockPage({
+                        overlayColor: '#000000',
+                        state: 'danger',
+                        message: "{{trans('general.please_wait')}}",
+                    });
+                },
                 success: function (data) {
+                    KTApp.unblockPage();
                     console.log(data);
                     if (data.status == true) {
                         Swal.fire({

@@ -90,20 +90,21 @@
 /* End switch*/
 
 .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-heading, .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-link {
-     background-color: #a2a3b7;
+     background-color: #ffffff;
 
 }
 .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-heading .menu-text, .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-link .menu-text {
-    color: #ffffff;
+    color: #242222;
 }
-
-
 
 .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-heading .menu-icon.svg-icon svg g [fill], .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-link .menu-icon.svg-icon svg g [fill] {
     -webkit-transition: fill 0.3s ease;
     transition: fill 0.3s ease;
      fill: #494b74;
 }
+
+
+
 .form-control:disabled, .form-control[readonly] {
     background-color: #bec5c7;
     opacity: 1;

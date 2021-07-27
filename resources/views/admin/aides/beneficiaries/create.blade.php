@@ -1060,12 +1060,10 @@
                         state: 'danger',
                         message: "{{trans('general.please_wait')}}",
                     });
-                    setTimeout(function () {
-                        KTApp.unblockPage();
-                    }, 1500);
                 },
 
                 success: function (data) {
+                    KTApp.unblockPage();
                     console.log(data);
                     if (data.status == true) {
                         Swal.fire({
@@ -1079,7 +1077,6 @@
                             window.location.href = "{{route('aides.beneficiaries')}}";
                         });
                     }
-
                 },
 
                 complete: function () {

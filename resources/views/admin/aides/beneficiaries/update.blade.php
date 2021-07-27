@@ -1065,6 +1065,8 @@
                 $('#disabled_less_than_18_count').removeClass("is-valid");
                 $('.family_disabled_section').removeClass('d-none');
             } else {
+                $('#disabled_count').val("0");
+                $('#disabled_less_than_18_count').val("0");
                 $('.family_disabled_section').addClass('d-none');
             }
         });
@@ -1077,6 +1079,7 @@
                 $('#patients_count').removeClass("is-valid");
                 $('.patients_section').removeClass('d-none');
             } else {
+                $('#patients_count').val("0");
                 $('.patients_section').addClass('d-none');
             }
         });
@@ -1106,12 +1109,9 @@
                         state: 'danger',
                         message: "{{trans('general.please_wait')}}",
                     });
-                    setTimeout(function () {
-                        KTApp.unblockPage();
-                    }, 1500);
                 },
-
                 success: function (data) {
+                    KTApp.unblockPage();
                     console.log(data);
                     if (data.status == true) {
                         Swal.fire({
@@ -1125,9 +1125,7 @@
                             //window.location.href = "{{route('aides.beneficiaries')}}";
                         });
                     }
-
                 },
-
                 complete: function () {
                     KTApp.unblockPage();
                 },

@@ -2,13 +2,13 @@
 @section('title') @endsection
 @section('content')
 
+
     <form class="form" action="{{route('store.admin.settings')}}" method="POST" id="form_settings_store"
           enctype="multipart/form-data">
     @csrf
     <!--begin::Subheader-->
         <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
-            <div
-                class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
                 <!--begin::Info-->
                 <div class="d-flex align-items-center flex-wrap mr-2">
 
@@ -155,7 +155,8 @@
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <input
                                                                         class="form-control form-control-solid form-control-lg"
-                                                                        name="site_name_ar" id="site_name_ar" type="text"
+                                                                        name="site_name_ar" id="site_name_ar"
+                                                                        type="text"
                                                                         placeholder=" {{trans('settings.enter_site_name_ar')}}"
                                                                         autocomplete="off"
                                                                         value="{{ setting()->site_name_ar}}"/>
@@ -173,7 +174,8 @@
                                                                 <div class="col-lg-9 col-xl-9">
                                                                     <input
                                                                         class="form-control form-control-solid form-control-lg"
-                                                                        name="site_name_en" id="site_name_en" type="text"
+                                                                        name="site_name_en" id="site_name_en"
+                                                                        type="text"
                                                                         placeholder=" {{trans('settings.enter_site_name_en')}}"
                                                                         autocomplete="off"
                                                                         value="{{setting()->site_name_en}}"/>
@@ -185,8 +187,6 @@
                                                         </div>
                                                     </div>
                                                     <br/>
-
-
 
 
                                                     <div class="card my-2">
@@ -658,13 +658,10 @@
                         state: 'danger',
                         message: "{{trans('general.please_wait')}}",
                     });
-                    setTimeout(function () {
-                        KTApp.unblockPage();
-                    }, 1500);
-
                 },// end beforeSend
 
                 success: function (data) {
+                    KTApp.unblockPage();
                     console.log(data);
                     if (data.status == true) {
                         Swal.fire({
@@ -672,23 +669,22 @@
                             text: "",
                             icon: "success",
                             allowOutsideClick: false,
-                            customClass: { confirmButton: 'update_settings_button' }
+                            customClass: {confirmButton: 'update_settings_button'}
                         });
                         $('.update_settings_button').click(function () {
-                            $('html, body').animate({scrollTop: 20}, 300);
+                            $('html, body').animate({scrollTop: 5}, 300);
                         });
                     }
 
                 },// end success
 
                 error: function (reject) {
-
                     KTApp.unblockPage();
                     var response = $.parseJSON(reject.responseText);
                     $.each(response.errors, function (key, value) {
                         $('#' + key).css('border-color', '#F64E60');
                         $('#' + key + '_error').text(value[0]);
-                        $('html, body').animate({scrollTop: 20}, 300);
+                        $('html, body').animate({scrollTop: 5}, 300);
                     });//end each
 
 

@@ -345,12 +345,9 @@
                         state: 'danger',
                         message: "{{trans('general.please_wait')}}",
                     });
-
-                    setTimeout(function() {
-                        KTApp.unblock('#model_admin_update .modal-content');
-                    }, 1500);
                 },//end beforeSend
                 success: function (data) {
+                    KTApp.unblock('#model_admin_update .modal-content');
                     console.log(data);
                     if (data.status == true) {
                         Swal.fire({

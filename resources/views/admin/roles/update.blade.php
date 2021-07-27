@@ -194,14 +194,11 @@
                         state: 'danger',
                         message: "{{trans('general.please_wait')}}",
                     });
-                    setTimeout(function () {
-                        KTApp.unblockPage();
-                    }, 1500);
                 },
 
                 success: function (data) {
+                    KTApp.unblockPage();
                     console.log(data);
-
                     if (data.status == true) {
                         Swal.fire({
                             title: data.msg,
@@ -214,8 +211,6 @@
                             window.location.href = "{{route('admin.roles')}}";
                         });
                     }
-
-
                 },
 
                 error: function (reject) {

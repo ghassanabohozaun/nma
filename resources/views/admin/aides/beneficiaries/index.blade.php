@@ -104,6 +104,11 @@
     <!--end::content-->
 
 
+    <style>
+        #m_table_1_filter{
+
+        }
+    </style>
 
 @endsection
 @push('js')
@@ -111,10 +116,8 @@
     <script
         src="{{asset('adminBoard/assets/plugins/custom/datatables/datatables.bundle.js')}}"
         type="text/javascript"></script>
-    <script src="{{asset('adminBoard/assets/js/data_table.js')}}" type="text/javascript"></script>
 
     <script>
-        window.data_url = "{{route('get.aides.beneficiaries')}}";
         window.columns = [{data: "id"},
             {data: "full_name"},
             {data: "personal_id"},
@@ -126,6 +129,53 @@
             {data: "is_noor_employee"},
             {data: "actions"},
         ];
+
+        loadBeneficiary();
+        function loadBeneficiary(){
+            $("#m_table_1").DataTable({
+                //dom: "<Bfrtip>",
+                dom: "B<'row'<'col-sm-12'tr>>\n\t\t\t<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
+                buttons: [
+                    {
+                        extend: 'pdfHtml5',
+                        text: 'PDF',
+                        footer: true,
+                    },
+                    {
+                        extend: 'print',
+                        text: 'print',
+                        footer: true,
+                    },
+                    {
+                        extend: 'csv',
+                        text: 'csv',
+                        footer: true,
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'excel',
+                        footer: true,
+                    },
+                ],
+
+                responsive: !0,
+                //dom: "<'row'<'col-sm-12'tr>>\n\t\t\t<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>",
+                lengthMenu: [5, 10, 25, 50],
+                pageLength: 10,
+                language: window.lang,
+                searchDelay: 500,
+                processing: !0,
+                serverSide: !0,
+                select: false,
+                searching: true,
+                order: [[1, "asc"]],
+                ajax:{
+                    url:"{{route('get.aides.beneficiaries')}}",
+                    data: {personal_id: '801501313'}
+                },
+                columns: window.columns,
+            })
+        }
     </script>
 
 
@@ -164,10 +214,10 @@
                                     customClass: {confirmButton: 'delete_beneficiary_button'}
                                 });
                                 $('.delete_beneficiary_button').click(function () {
-                                    updateDataTable();
+                                    $('#m_table_1').DataTable().clear().destroy();
+                                    loadBeneficiary();
                                 });
                             }
-
                             if (data.status == false) {
                                 Swal.fire({
                                     title: "{!! trans('general.cancelled') !!}",
@@ -190,8 +240,6 @@
                     })
                 }
             });
-
-
         });
 
 

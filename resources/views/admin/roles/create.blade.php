@@ -186,12 +186,10 @@
                         state: 'danger',
                         message: "{{trans('general.please_wait')}}",
                     });
-                    setTimeout(function () {
-                        KTApp.unblockPage();
-                    }, 1500);
                 },
 
                 success: function (data) {
+                    KTApp.unblockPage();
                     console.log(data);
                     if (data.status == true) {
                         Swal.fire({
@@ -209,6 +207,7 @@
                 },
 
                 error: function (reject) {
+                    KTApp.unblockPage();
                     var response = $.parseJSON(reject.responseText);
                     $.each(response.errors, function (key, value) {
                         $('#' + key + '_error').text(value[0]);

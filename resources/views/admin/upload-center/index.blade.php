@@ -2,7 +2,8 @@
 @section('title') @endsection
 @section('content')
 
-    <form enctype="multipart/form-data" action="{{route('admin.upload.center.store')}}" method="POST" id="form_upload_center">
+    <form enctype="multipart/form-data" action="{{route('admin.upload.center.store')}}" method="POST"
+          id="form_upload_center">
     @csrf
 
     <!--begin::Subheader-->
@@ -313,21 +314,15 @@
                         state: 'danger',
                         message: "{{trans('general.please_wait')}}",
                     });
-                    setTimeout(function () {
-                        KTApp.unblockPage();
-                    }, 1500);
-
                 },//end beforeSend
                 success: function (data) {
+                    KTApp.unblockPage();
                     console.log(data);
-
                     if (data.status == true) {
                         notifySuccessOrError(data.msg, 'success');
                         datatable.reload();
                         $('#file_label').html('');
-
                     }
-
                     if (data.errors) {
                         if (data.errors.file) {
                             $('#file_error').html(data.errors.file[0]);
@@ -387,11 +382,9 @@
                         state: 'danger',
                         message: "{{trans('general.please_wait')}}",
                     });
-                    setTimeout(function () {
-                        KTApp.unblockPage();
-                    }, 1500);
                 },//end beforeSend
                 success: function (data) {
+                    KTApp.unblockPage();
                     if (data.status == true) {
                         notifySuccessOrError(data.msg, 'success');
                         datatable.reload();
@@ -417,7 +410,7 @@
 
                     //////////////////////////////////////////////////////
                     /// Start clipboard
-                    var copyText ="{{url('/')}}/storage/"+data.data.full_path_after_upload;
+                    var copyText = "{{url('/')}}/storage/" + data.data.full_path_after_upload;
                     var el = document.createElement('textarea');
                     el.value = copyText;
                     el.setAttribute('readonly', '');

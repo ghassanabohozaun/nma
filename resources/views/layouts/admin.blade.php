@@ -414,7 +414,6 @@
     });
 
 
-
     ////////////////////////////////////////////////////////////////////////////
     //////// notifySuccessOrError
     function notifySuccessOrError(notify_message, notify_type) {
@@ -490,6 +489,18 @@
     var personal_id_validation = "{{ __('general.personal_id_validation') }}";
     var mobile_number_validation = "{{ __('general.mobile_number_validation') }}";
     var choose_validation = "{{ __('general.choose_validation') }}";
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    ////////  Datatable Fonts
+    pdfMake.fonts = {
+        Roboto: {
+            normal: "{!! asset('adminBoard/assets/fonts/ArbFONTS-bein-ar-normal.ttf') !!}",
+            bold: "{!! asset('adminBoard/assets/fonts/ArbFONTS-bein-ar-normal.ttf') !!}",
+            italics: "{!! asset('adminBoard/assets/fonts/ArbFONTS-beIN Normal .ttf') !!}",
+            bolditalics: "{!! asset('adminBoard/assets/fonts/ArbFONTS-beIN Normal .ttf') !!}"
+        },
+    }
 
 
     ///////////////////////////////////////////////////////////////////////////

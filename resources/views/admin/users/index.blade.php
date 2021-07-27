@@ -210,11 +210,9 @@
                         state: 'danger',
                         message: "{{trans('general.please_wait')}}",
                     });
-                    setTimeout(function () {
-                        KTApp.unblockPage();
-                    }, 1500);
                 },//end beforeSend
                 success: function (data) {
+                    KTApp.unblockPage();
                     console.log(data);
                     if (data.status == true) {
                         notifySuccessOrError(data.msg, 'success');
@@ -245,7 +243,15 @@
                 data: {id, id},
                 type: 'post',
                 dataType: 'JSON',
+                beforeSend: function () {
+                    KTApp.blockPage({
+                        overlayColor: '#000000',
+                        state: 'danger',
+                        message: "{{trans('general.please_wait')}}",
+                    });
+                },//end beforeSend
                 success: function (data) {
+                    KTApp.unblockPage();
                     console.log(data);
                     if (data.status == true) {
                         Swal.fire({
